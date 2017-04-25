@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+
+    
+
+    <title>
+      关于Unix(Linux)系统下的/usr文件夹 | Hanying Garden 
+    </title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    
+      <meta name="author" content="Zhang Hanying">
+    
+    
+
+    <meta name="description" content="Unix(Linux)下的/usr文件夹，我一直以为是”user”的缩写，而且周围的很多人也跟我是同样的观点，也都读作”user”。 后来想完善下自己的linux知识，看《鸟哥的linux私房菜》的时候，书上说，/usr文件夹其实是”Unix System Resources”的缩写，作用类似于Window下的”Program Files”文件夹。一想也是，用户的文件不是都放在/home文件夹下面">
+<meta name="keywords" content="linux">
+<meta property="og:type" content="article">
+<meta property="og:title" content="关于Unix(Linux)系统下的/usr文件夹 | Hanying Garden">
+<meta property="og:url" content="http://hanyinggarden.net/2016/05/17/关于Unix-Linux-系统下的-usr文件夹/index.html">
+<meta property="og:site_name" content="Hanying Garden">
+<meta property="og:description" content="Unix(Linux)下的/usr文件夹，我一直以为是”user”的缩写，而且周围的很多人也跟我是同样的观点，也都读作”user”。 后来想完善下自己的linux知识，看《鸟哥的linux私房菜》的时候，书上说，/usr文件夹其实是”Unix System Resources”的缩写，作用类似于Window下的”Program Files”文件夹。一想也是，用户的文件不是都放在/home文件夹下面">
+<meta property="og:updated_time" content="2017-04-25T12:01:26.621Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="关于Unix(Linux)系统下的/usr文件夹 | Hanying Garden">
+<meta name="twitter:description" content="Unix(Linux)下的/usr文件夹，我一直以为是”user”的缩写，而且周围的很多人也跟我是同样的观点，也都读作”user”。 后来想完善下自己的linux知识，看《鸟哥的linux私房菜》的时候，书上说，/usr文件夹其实是”Unix System Resources”的缩写，作用类似于Window下的”Program Files”文件夹。一想也是，用户的文件不是都放在/home文件夹下面">
+    
+    
+    
+      <link rel="icon" type="image/x-icon" href="/favicon.png">
+    
+    <link rel="stylesheet" href="/css/uno.css">
+    <link rel="stylesheet" href="/css/highlight.css">
+    <link rel="stylesheet" href="/css/archive.css">
+    <link rel="stylesheet" href="/css/china-social-icon.css">
+
+</head>
+<body>
+
+    <span class="mobile btn-mobile-menu">
+        <i class="icon icon-list btn-mobile-menu__icon"></i>
+        <i class="icon icon-x-circle btn-mobile-close__icon hidden"></i>
+    </span>
+
+    
+
+<header class="panel-cover panel-cover--collapsed">
+
+
+  <div class="panel-main">
+
+  
+    <div class="panel-main__inner panel-inverted">
+    <div class="panel-main__content">
+
+        
+
+        <h1 class="panel-cover__title panel-title"><a href="/" title="link to homepage">Hanying Garden</a></h1>
+        <hr class="panel-cover__divider" />
+
+        
+        <p class="panel-cover__description">
+          自律 面对
+        </p>
+        <hr class="panel-cover__divider panel-cover__divider--secondary" />
+        
+
+        <div class="navigation-wrapper">
+
+          <nav class="cover-navigation cover-navigation--primary">
+            <ul class="navigation">
+
+              
+                
+                <li class="navigation__item"><a href="/#blog" title="" class="blog-button">首页</a></li>
+              
+                
+                <li class="navigation__item"><a href="/about" title="" class="">关于</a></li>
+              
+
+            </ul>
+          </nav>
+
+          <!-- ----------------------------
+To add a new social icon simply duplicate one of the list items from below
+and change the class in the <i> tag to match the desired social network
+and then add your link to the <a>. Here is a full list of social network
+classes that you can use:
+
+    icon-social-500px
+    icon-social-behance
+    icon-social-delicious
+    icon-social-designer-news
+    icon-social-deviant-art
+    icon-social-digg
+    icon-social-dribbble
+    icon-social-facebook
+    icon-social-flickr
+    icon-social-forrst
+    icon-social-foursquare
+    icon-social-github
+    icon-social-google-plus
+    icon-social-hi5
+    icon-social-instagram
+    icon-social-lastfm
+    icon-social-linkedin
+    icon-social-medium
+    icon-social-myspace
+    icon-social-path
+    icon-social-pinterest
+    icon-social-rdio
+    icon-social-reddit
+    icon-social-skype
+    icon-social-spotify
+    icon-social-stack-overflow
+    icon-social-steam
+    icon-social-stumbleupon
+    icon-social-treehouse
+    icon-social-tumblr
+    icon-social-twitter
+    icon-social-vimeo
+    icon-social-xbox
+    icon-social-yelp
+    icon-social-youtube
+    icon-social-zerply
+    icon-mail
+
+-------------------------------->
+
+<!-- add social info here -->
+
+
+
+        </div>
+
+      </div>
+
+    </div>
+
+    <div class="panel-cover--overlay"></div>
+  </div>
+</header>
+
+    <div class="content-wrapper">
+        <div class="content-wrapper__inner entry">
+            
+
+<article class="post-container post-container--single">
+
+  <header class="post-header">
+    
+    <h1 class="post-title">关于Unix(Linux)系统下的/usr文件夹</h1>
+
+    
+
+    <div class="post-meta">
+      <time datetime="2016-05-17" class="post-meta__date date">2016-05-17</time> 
+
+      <span class="post-meta__tags tags">
+
+          
+            <font class="categories">
+            &#8226; 分类:
+            <a class="categories-link" href="/categories/Linux/">Linux</a>
+            </font>
+          
+
+          
+             &#8226; 标签:
+            <font class="tags">
+              <a class="tags-link" href="/tags/linux/">linux</a>
+            </font>
+          
+
+      </span>
+    </div>
+    
+    
+
+  </header>
+
+  <section id="post-content" class="article-content post">
+    <p>Unix(Linux)下的<strong>/usr</strong>文件夹，我一直以为是<strong>”user”</strong>的缩写，而且周围的很多人也跟我是同样的观点，也都读作”user”。</p>
+<p>后来想完善下自己的linux知识，看《鸟哥的linux私房菜》的时候，书上说，<strong>/usr</strong>文件夹其实是<strong>”Unix System Resources”</strong>的缩写，作用类似于Window下的<strong>”Program Files”</strong>文件夹。一想也是，用户的文件不是都放在<strong>/home</strong>文件夹下面的吗？于是恍然大悟，一面大呼”得之矣，得之矣”，一面悔恨自己学知识太不求甚解了，作为技术人员，此乃大忌。</p>
+<p>岂料后来剧情又发生翻转，又看到的很多资料上，包括类似wiki的权威资料上面，都多少把<strong>/usr</strong>看做是用户文件夹，比如：</p>
+<blockquote>
+<p>/usr usually contains by far the largest share of data on a system. Hence, this is one of the most important directories in the system as it contains all the user binaries, their documentation, libraries, header files, etc…. X and its supporting libraries can be found here. </p>
+</blockquote>
+<p>再细究起来，才发现，这原来是Unix系统的历史问题造成的。</p>
+<p>原来最初Unix的存储盘容量很小，随着Unix系统目录变得越来越大，一个存储盘已经不够用，于是添加了第二块存储盘，专门用来存放用户的数据，挂载点即为<strong>/usr</strong>，而且两块存储盘上的目录结构是一模一样的。再后来，又添加了第三块存储盘，规定第三块存储盘的挂载点为<strong>/home</strong>，存放用户的<code>数据</code>，第二块存储盘上存放用户的<code>程序</code>。</p>
+<p>这种存储结构后来一直延续了下来，只是<strong>/usr</strong>文件夹不再只是存储用户的程序，而是也包括系统开发商开发的程序，用户的程序存放在<strong>/usr/local</strong>目录下。</p>
+<p>所以说，开始的两种说法都只说对了一部分，都不全面。</p>
+<p>其实，因为历史原因导致的概念不清不止这一个，还有比如<code>回车</code>和<code>换行</code>的区别。具体的说明，可以参看阮一峰的<a href="http://www.ruanyifeng.com/blog/2006/04/post_213.html" target="_blank" rel="external">博客</a>，本文也参考了阮老师的<a href="http://www.ruanyifeng.com/blog/2012/02/a_history_of_unix_directory_structure.html" target="_blank" rel="external">博文</a>。</p>
+
+  </section>
+
+  
+
+<section class="post-comments">
+  <div id="disqus_thread"></div>
+  <script type="text/javascript">
+      var disqus_shortname = 'hanyinggarden'; 
+      /* * * DON'T EDIT BELOW THIS LINE * * */
+      (function() {
+          var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+          dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+          (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+      })();
+  </script>
+  <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</section>
+
+
+  
+</article>
+
+
+            <footer class="footer">
+
+    <span class="footer__copyright">&copy; 2017. Zhang Hanying. | 由<a href="https://hexo.io/">Hexo</a>强力驱动 | 主题<a href="https://github.com/someus/huno">Huno</a></span>
+    
+</footer>
+        </div>
+    </div>
+
+    <!-- js files -->
+    <script src="/js/jquery.min.js"></script>
+    <script src="/js/main.js"></script>
+    <script src="/js/scale.fix.js"></script>
+    
+
+    
+
+    <script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript"> 
+        $(document).ready(function(){
+            MathJax.Hub.Config({ 
+                tex2jax: {inlineMath: [['[latex]','[/latex]'], ['\\(','\\)']]} 
+            });
+        });
+    </script>
+
+
+    
+
+    <script src="/js/awesome-toc.min.js"></script>
+    <script>
+        $(document).ready(function(){
+            $.awesome_toc({
+                overlay: true,
+                contentId: "post-content",
+            });
+        });
+    </script>
+
+
+    
+    
+
+    <script src="/js/jquery.githubRepoWidget.min.js"></script>
+
+
+    <!--kill ie6 -->
+<!--[if IE 6]>
+  <script src="//letskillie6.googlecode.com/svn/trunk/2/zh_CN.js"></script>
+<![endif]-->
+
+</body>
+</html>

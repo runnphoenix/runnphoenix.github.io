@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+
+    
+
+    <title>
+      软件设计的一些基本原则 | Hanying Garden 
+    </title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    
+      <meta name="author" content="Zhang Hanying">
+    
+    
+
+    <meta name="description" content="学习设计模式遇到的困难从进入到软件开发领域开始接触设计模式，到现在也有两年多的时间了。可悲的是，到现在自己都没有对设计模式建立起一套完整甚至是基本的理解。不用功是一方面，另一方面，的确在试图理解设计模式的时候出现了很多困难。 总结起来，出现这些困难无非是两个原因： - 软件开发实践不足，深度不够，没有必须要使用设计模式的环境 - 对软件开发的一些更基本的原则理解不够，没学好走路就想跑，肯定会摔跤">
+<meta name="keywords">
+<meta property="og:type" content="article">
+<meta property="og:title" content="软件设计的一些基本原则 | Hanying Garden">
+<meta property="og:url" content="http://hanyinggarden.net/2016/07/14/软件设计的一些基本原则/index.html">
+<meta property="og:site_name" content="Hanying Garden">
+<meta property="og:description" content="学习设计模式遇到的困难从进入到软件开发领域开始接触设计模式，到现在也有两年多的时间了。可悲的是，到现在自己都没有对设计模式建立起一套完整甚至是基本的理解。不用功是一方面，另一方面，的确在试图理解设计模式的时候出现了很多困难。 总结起来，出现这些困难无非是两个原因： - 软件开发实践不足，深度不够，没有必须要使用设计模式的环境 - 对软件开发的一些更基本的原则理解不够，没学好走路就想跑，肯定会摔跤">
+<meta property="og:updated_time" content="2017-04-25T12:01:26.653Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="软件设计的一些基本原则 | Hanying Garden">
+<meta name="twitter:description" content="学习设计模式遇到的困难从进入到软件开发领域开始接触设计模式，到现在也有两年多的时间了。可悲的是，到现在自己都没有对设计模式建立起一套完整甚至是基本的理解。不用功是一方面，另一方面，的确在试图理解设计模式的时候出现了很多困难。 总结起来，出现这些困难无非是两个原因： - 软件开发实践不足，深度不够，没有必须要使用设计模式的环境 - 对软件开发的一些更基本的原则理解不够，没学好走路就想跑，肯定会摔跤">
+    
+    
+    
+      <link rel="icon" type="image/x-icon" href="/favicon.png">
+    
+    <link rel="stylesheet" href="/css/uno.css">
+    <link rel="stylesheet" href="/css/highlight.css">
+    <link rel="stylesheet" href="/css/archive.css">
+    <link rel="stylesheet" href="/css/china-social-icon.css">
+
+</head>
+<body>
+
+    <span class="mobile btn-mobile-menu">
+        <i class="icon icon-list btn-mobile-menu__icon"></i>
+        <i class="icon icon-x-circle btn-mobile-close__icon hidden"></i>
+    </span>
+
+    
+
+<header class="panel-cover panel-cover--collapsed">
+
+
+  <div class="panel-main">
+
+  
+    <div class="panel-main__inner panel-inverted">
+    <div class="panel-main__content">
+
+        
+
+        <h1 class="panel-cover__title panel-title"><a href="/" title="link to homepage">Hanying Garden</a></h1>
+        <hr class="panel-cover__divider" />
+
+        
+        <p class="panel-cover__description">
+          自律 面对
+        </p>
+        <hr class="panel-cover__divider panel-cover__divider--secondary" />
+        
+
+        <div class="navigation-wrapper">
+
+          <nav class="cover-navigation cover-navigation--primary">
+            <ul class="navigation">
+
+              
+                
+                <li class="navigation__item"><a href="/#blog" title="" class="blog-button">首页</a></li>
+              
+                
+                <li class="navigation__item"><a href="/about" title="" class="">关于</a></li>
+              
+
+            </ul>
+          </nav>
+
+          <!-- ----------------------------
+To add a new social icon simply duplicate one of the list items from below
+and change the class in the <i> tag to match the desired social network
+and then add your link to the <a>. Here is a full list of social network
+classes that you can use:
+
+    icon-social-500px
+    icon-social-behance
+    icon-social-delicious
+    icon-social-designer-news
+    icon-social-deviant-art
+    icon-social-digg
+    icon-social-dribbble
+    icon-social-facebook
+    icon-social-flickr
+    icon-social-forrst
+    icon-social-foursquare
+    icon-social-github
+    icon-social-google-plus
+    icon-social-hi5
+    icon-social-instagram
+    icon-social-lastfm
+    icon-social-linkedin
+    icon-social-medium
+    icon-social-myspace
+    icon-social-path
+    icon-social-pinterest
+    icon-social-rdio
+    icon-social-reddit
+    icon-social-skype
+    icon-social-spotify
+    icon-social-stack-overflow
+    icon-social-steam
+    icon-social-stumbleupon
+    icon-social-treehouse
+    icon-social-tumblr
+    icon-social-twitter
+    icon-social-vimeo
+    icon-social-xbox
+    icon-social-yelp
+    icon-social-youtube
+    icon-social-zerply
+    icon-mail
+
+-------------------------------->
+
+<!-- add social info here -->
+
+
+
+        </div>
+
+      </div>
+
+    </div>
+
+    <div class="panel-cover--overlay"></div>
+  </div>
+</header>
+
+    <div class="content-wrapper">
+        <div class="content-wrapper__inner entry">
+            
+
+<article class="post-container post-container--single">
+
+  <header class="post-header">
+    
+    <h1 class="post-title">软件设计的一些基本原则</h1>
+
+    
+
+    <div class="post-meta">
+      <time datetime="2016-07-14" class="post-meta__date date">2016-07-14</time> 
+
+      <span class="post-meta__tags tags">
+
+          
+
+          
+
+      </span>
+    </div>
+    
+    
+
+  </header>
+
+  <section id="post-content" class="article-content post">
+    <h2 id="学习设计模式遇到的困难"><a href="#学习设计模式遇到的困难" class="headerlink" title="学习设计模式遇到的困难"></a>学习设计模式遇到的困难</h2><p>从进入到软件开发领域开始接触设计模式，到现在也有两年多的时间了。可悲的是，到现在自己都没有对设计模式建立起一套完整甚至是基本的理解。不用功是一方面，另一方面，的确在试图理解设计模式的时候出现了很多困难。</p>
+<p>总结起来，出现这些困难无非是两个原因：</p>
+<pre><code>- 软件开发实践不足，深度不够，没有必须要使用设计模式的环境
+- 对软件开发的一些更基本的原则理解不够，没学好走路就想跑，肯定会摔跤
+</code></pre><p>第一个原因需要在实际工作中不断积累和总结。今天来针对第二个原因，总结一下软件开发的一些最基本的设计原则。</p>
+<h2 id="软件设计的基本原则"><a href="#软件设计的基本原则" class="headerlink" title="软件设计的基本原则"></a>软件设计的基本原则</h2><h3 id="S-O-L-I-D原则"><a href="#S-O-L-I-D原则" class="headerlink" title="- S.O.L.I.D原则"></a>- S.O.L.I.D原则</h3><p>S.O.L.I.D原则是五个基本原则，分别是：</p>
+<pre><code>- Single Responsibility Principle (SRP) 单一职责原则
+</code></pre><p>单一职责原则很好理解：一个类，只做一件事。最好的体现就是Linux／Unix系统，每个程序只负责一件单一的事，需要负责的功能时，可以通过管道进行组合。</p>
+<pre><code>- Open/Closed Principle (OCP) 开闭原则
+</code></pre><p>对扩展开放，对修改封闭。对修改封闭是坚持原则，对扩展开放是保持通融。浏览器的各种插件就是一个很好的例子。个人以为，装饰模式就是这个原则的体现。耗子叔的文章中提到策略模式属于这个原则的实现（而非装饰模式），我对于策略模式的理解还不到位，此处需要进一步深入理解，可能存在认知偏差。</p>
+<pre><code>- Leskov Substitution Principle (LSP) 李氏替换原则
+</code></pre><p>这个原则是说，代码中的子类应该能够替代父类，并且不会出现任何问题。<br>这个原则是使代码符合开闭原则的一个重要保证。<br>使得父类型的模块在无需修改的情况下就可以扩展。<br>例子：“正方形不是长方形”</p>
+<pre><code>- Interface Segregation Principle (ISP) 接口隔离原则
+</code></pre><p>使用多个专用接口，而不是使用一个大的总接口。</p>
+<pre><code>- Dependency Inversion Principle (DIP) 依赖倒置原则
+</code></pre><p>高层模块不应该依赖于低层模块的实现，而应该依赖于高层抽象。</p>
+<pre><code>- Don’t Repeat Yourself (DRY)
+
+- 高內聚，低耦合
+
+- 面向接口而非实现编程
+</code></pre><h2 id="多一句嘴，对设计模式的非议"><a href="#多一句嘴，对设计模式的非议" class="headerlink" title="多一句嘴，对设计模式的非议"></a>多一句嘴，对设计模式的非议</h2><p>很多大牛都提到过，设计模式并非面向对象编程独有。实际上早在面向对象编程出现之前，各种设计模式就被广泛使用了，只不过当时没有被总结出来。</p>
+<p>防止设计模式的过度使用，因为想要使用设计模式而使用设计模式，反而会造成代码的可读性和可维护性更差。</p>
+<p>Peter Norvig 在98年就指出，在“动态语言”中，设计模式绝大部分都“透明”了。</p>
+
+  </section>
+
+  
+
+<section class="post-comments">
+  <div id="disqus_thread"></div>
+  <script type="text/javascript">
+      var disqus_shortname = 'hanyinggarden'; 
+      /* * * DON'T EDIT BELOW THIS LINE * * */
+      (function() {
+          var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+          dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+          (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+      })();
+  </script>
+  <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</section>
+
+
+  
+</article>
+
+
+            <footer class="footer">
+
+    <span class="footer__copyright">&copy; 2017. Zhang Hanying. | 由<a href="https://hexo.io/">Hexo</a>强力驱动 | 主题<a href="https://github.com/someus/huno">Huno</a></span>
+    
+</footer>
+        </div>
+    </div>
+
+    <!-- js files -->
+    <script src="/js/jquery.min.js"></script>
+    <script src="/js/main.js"></script>
+    <script src="/js/scale.fix.js"></script>
+    
+
+    
+
+    <script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript"> 
+        $(document).ready(function(){
+            MathJax.Hub.Config({ 
+                tex2jax: {inlineMath: [['[latex]','[/latex]'], ['\\(','\\)']]} 
+            });
+        });
+    </script>
+
+
+    
+
+    <script src="/js/awesome-toc.min.js"></script>
+    <script>
+        $(document).ready(function(){
+            $.awesome_toc({
+                overlay: true,
+                contentId: "post-content",
+            });
+        });
+    </script>
+
+
+    
+    
+
+    <script src="/js/jquery.githubRepoWidget.min.js"></script>
+
+
+    <!--kill ie6 -->
+<!--[if IE 6]>
+  <script src="//letskillie6.googlecode.com/svn/trunk/2/zh_CN.js"></script>
+<![endif]-->
+
+</body>
+</html>

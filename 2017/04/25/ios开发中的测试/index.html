@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+
+    
+
+    <title>
+      学习iOS测试的初步总结 | Hanying Garden 
+    </title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    
+      <meta name="author" content="Zhang Hanying">
+    
+    
+
+    <meta name="description" content="学习iOS测试的初步总结">
+<meta name="keywords" content="测试,iOS,TDD,BDD,单元测试">
+<meta property="og:type" content="article">
+<meta property="og:title" content="学习iOS测试的初步总结 | Hanying Garden">
+<meta property="og:url" content="http://hanyinggarden.net/2017/04/25/ios开发中的测试/index.html">
+<meta property="og:site_name" content="Hanying Garden">
+<meta property="og:description" content="学习iOS测试的初步总结">
+<meta property="og:image" content="http://hanyinggarden.net/2017/04/25/ios开发中的测试/0.png">
+<meta property="og:image" content="http://hanyinggarden.net/2017/04/25/ios开发中的测试/最初两个测试方法.png">
+<meta property="og:image" content="http://hanyinggarden.net/2017/04/25/ios开发中的测试/最初两个测试方法通过.png">
+<meta property="og:image" content="http://hanyinggarden.net/2017/04/25/ios开发中的测试/加入加法测试.png">
+<meta property="og:image" content="http://hanyinggarden.net/2017/04/25/ios开发中的测试/加法头文件.png">
+<meta property="og:image" content="http://hanyinggarden.net/2017/04/25/ios开发中的测试/加法实现.png">
+<meta property="og:image" content="http://hanyinggarden.net/2017/04/25/ios开发中的测试/加法通过.png">
+<meta property="og:image" content="http://hanyinggarden.net/2017/04/25/ios开发中的测试/使用哪个项目文件.png">
+<meta property="og:image" content="http://hanyinggarden.net/2017/04/25/ios开发中的测试/kiwiResult.png">
+<meta property="og:image" content="http://hanyinggarden.net/2017/04/25/ios开发中的测试/加入乘法测试.png">
+<meta property="og:image" content="http://hanyinggarden.net/2017/04/25/ios开发中的测试/乘法头文件.png">
+<meta property="og:image" content="http://hanyinggarden.net/2017/04/25/ios开发中的测试/乘法实现.png">
+<meta property="og:image" content="http://hanyinggarden.net/2017/04/25/ios开发中的测试/乘法通过.png">
+<meta property="og:image" content="http://hanyinggarden.net/2017/04/25/ios开发中的测试/单元测试实现.png">
+<meta property="og:updated_time" content="2017-04-25T12:01:26.621Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="学习iOS测试的初步总结 | Hanying Garden">
+<meta name="twitter:description" content="学习iOS测试的初步总结">
+<meta name="twitter:image" content="http://hanyinggarden.net/2017/04/25/ios开发中的测试/0.png">
+    
+    
+    
+      <link rel="icon" type="image/x-icon" href="/favicon.png">
+    
+    <link rel="stylesheet" href="/css/uno.css">
+    <link rel="stylesheet" href="/css/highlight.css">
+    <link rel="stylesheet" href="/css/archive.css">
+    <link rel="stylesheet" href="/css/china-social-icon.css">
+
+</head>
+<body>
+
+    <span class="mobile btn-mobile-menu">
+        <i class="icon icon-list btn-mobile-menu__icon"></i>
+        <i class="icon icon-x-circle btn-mobile-close__icon hidden"></i>
+    </span>
+
+    
+
+<header class="panel-cover panel-cover--collapsed">
+
+
+  <div class="panel-main">
+
+  
+    <div class="panel-main__inner panel-inverted">
+    <div class="panel-main__content">
+
+        
+
+        <h1 class="panel-cover__title panel-title"><a href="/" title="link to homepage">Hanying Garden</a></h1>
+        <hr class="panel-cover__divider" />
+
+        
+        <p class="panel-cover__description">
+          自律 面对
+        </p>
+        <hr class="panel-cover__divider panel-cover__divider--secondary" />
+        
+
+        <div class="navigation-wrapper">
+
+          <nav class="cover-navigation cover-navigation--primary">
+            <ul class="navigation">
+
+              
+                
+                <li class="navigation__item"><a href="/#blog" title="" class="blog-button">首页</a></li>
+              
+                
+                <li class="navigation__item"><a href="/about" title="" class="">关于</a></li>
+              
+
+            </ul>
+          </nav>
+
+          <!-- ----------------------------
+To add a new social icon simply duplicate one of the list items from below
+and change the class in the <i> tag to match the desired social network
+and then add your link to the <a>. Here is a full list of social network
+classes that you can use:
+
+    icon-social-500px
+    icon-social-behance
+    icon-social-delicious
+    icon-social-designer-news
+    icon-social-deviant-art
+    icon-social-digg
+    icon-social-dribbble
+    icon-social-facebook
+    icon-social-flickr
+    icon-social-forrst
+    icon-social-foursquare
+    icon-social-github
+    icon-social-google-plus
+    icon-social-hi5
+    icon-social-instagram
+    icon-social-lastfm
+    icon-social-linkedin
+    icon-social-medium
+    icon-social-myspace
+    icon-social-path
+    icon-social-pinterest
+    icon-social-rdio
+    icon-social-reddit
+    icon-social-skype
+    icon-social-spotify
+    icon-social-stack-overflow
+    icon-social-steam
+    icon-social-stumbleupon
+    icon-social-treehouse
+    icon-social-tumblr
+    icon-social-twitter
+    icon-social-vimeo
+    icon-social-xbox
+    icon-social-yelp
+    icon-social-youtube
+    icon-social-zerply
+    icon-mail
+
+-------------------------------->
+
+<!-- add social info here -->
+
+
+
+        </div>
+
+      </div>
+
+    </div>
+
+    <div class="panel-cover--overlay"></div>
+  </div>
+</header>
+
+    <div class="content-wrapper">
+        <div class="content-wrapper__inner entry">
+            
+
+<article class="post-container post-container--single">
+
+  <header class="post-header">
+    
+    <h1 class="post-title">学习iOS测试的初步总结</h1>
+
+    
+
+    <div class="post-meta">
+      <time datetime="2017-04-25" class="post-meta__date date">2017-04-25</time> 
+
+      <span class="post-meta__tags tags">
+
+          
+            <font class="categories">
+            &#8226; 分类:
+            <a class="categories-link" href="/categories/iOS/">iOS</a>
+            </font>
+          
+
+          
+             &#8226; 标签:
+            <font class="tags">
+              <a class="tags-link" href="/tags/BDD/">BDD</a>, <a class="tags-link" href="/tags/TDD/">TDD</a>, <a class="tags-link" href="/tags/iOS/">iOS</a>, <a class="tags-link" href="/tags/单元测试/">单元测试</a>, <a class="tags-link" href="/tags/测试/">测试</a>
+            </font>
+          
+
+      </span>
+    </div>
+    
+    
+
+  </header>
+
+  <section id="post-content" class="article-content post">
+    <p>我最近学习iOS测试的初步总结，刚开始学习测试，难免会认识肤浅，有很多错误，欢迎指正。<br><a id="more"></a></p>
+<p>首先需要注意，测试驱动开发和行为驱动开发，重点还是在开发上，是一种<strong>开发方式</strong>而不是测试方式。</p>
+<h2 id="测试驱动开发TDD"><a href="#测试驱动开发TDD" class="headerlink" title="测试驱动开发TDD"></a>测试驱动开发TDD</h2><p>TDD, 即Test Driven Development, 驱动测试开发，是先写测试，然后再写代码，如果代码都能够通过写好的测试，那就表示代码通过。TDD与我们平时的流程刚好相反，甚至可以说是一种比较极端的做法。</p>
+<p>TDD主要使用XCode中的<code>XCTest</code>来完成。</p>
+<p><strong>举例说明：</strong></p>
+<p>在XCode中建立一个叫Calculator的新项目。项目建立之后，XCode其实已经为我们建立了test。如图所示：</p>
+<p><img src="./0.png" alt=""></p>
+<p>CalculatorTests.m文件中已经有四个方法：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">- (void)setup:</div><div class="line">- (void)tearDown:</div><div class="line">- (void)testExample:</div><div class="line">- (void)testPerformanceExample:</div></pre></td></tr></table></figure>
+<p>XCTest在进行测试时将会寻找测试target中的所有<code>XCTestCase</code>子类，并运行其中以<code>test</code>开头的所有实例方法。在这里，默认实现的-testExample将被执行，而在这个方法里，Xcode默认写了一个<code>XCTAssert</code>的断言，令测试通过。所谓断言，就是判断输入的条件是否满足。如果不满足，则抛出错误并输出预先规定的字符串作为提示。另外，默认还有两个方法-setUp和-tearDown，这两个方法会分别在每个测试开始和结束的时候被调用。最后一个方法是用来测试性能的，暂时不做分析。</p>
+<p>TDD的原则是先写测试，后写代码。我们先在这个测试文件里面加入两个测试方法：</p>
+<p><img src="./最初两个测试方法.png" alt=""></p>
+<p>可以发现不但测试不能通过，连编译都存在问题，因为我们甚至连Calculator类都没有创建。实际上，在新建立Calculator文件并导入头文件到测试文件之后，这两个测试方法就都可以通过了，因为这两个方法只是用来测试Calculator类是否存在以及是否可以被初始化：</p>
+<p><img src="./最初两个测试方法通过.png" alt=""></p>
+<p>接下来我们测试Calculator类的基本功能。在测试文件中加入如下方法：</p>
+<p><img src="./加入加法测试.png" alt=""></p>
+<p>然后，在Calculator.h和Calculator.m两个文件中实现Calculator的加法运算功能：</p>
+<p><img src="./加法头文件.png" alt=""></p>
+<p><img src="./加法实现.png" alt=""></p>
+<p>再运行测试（快捷方式<code>⌘U</code>），可以发现测试通过：</p>
+<p><img src="./加法通过.png" alt=""></p>
+<p>这里只是简单介绍一下TDD的基本思想和基本使用方法，很多东西未详细解释（各种断言的详细使用方法，性能测试的使用，可能在后续版本中添加）。</p>
+<h2 id="行为驱动开发BDD"><a href="#行为驱动开发BDD" class="headerlink" title="行为驱动开发BDD"></a>行为驱动开发BDD</h2><h3 id="TDD的不足"><a href="#TDD的不足" class="headerlink" title="TDD的不足"></a>TDD的不足</h3><ol>
+<li><p>各个测试方法之间是割裂的。而且因为可能会存在很多个测试方法，很难寻找到某个特定功能的测试方法，测试文件的可读性很差</p>
+</li>
+<li><p>难以使用<code>stub</code>和<code>mock</code>（下文详述，可简单理解为TDD难以处理代码之间依赖性很强时候的测试）</p>
+</li>
+</ol>
+<h3 id="BDD"><a href="#BDD" class="headerlink" title="BDD"></a>BDD</h3><p>BDD解决了上述两个问题，将测试语句转换为类似自然语句的描述，方便理解和维护。也可以使用stub和mock来解决代码依赖性的问题。</p>
+<p>BDD可以概括为三段式：<code>Given-When-Then</code>。非常接近自然语言的风格。</p>
+<p>BDD框架有很多个，我们主要介绍和使用<code>kiwi</code>，kiwi实际使用如下图所示：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">describe(@&quot;Team&quot;, ^&#123; </div><div class="line">	context(@&quot;when newly created&quot;, ^&#123; 			 	   				</div><div class="line">		it(@&quot;should have a name&quot;, ^&#123; </div><div class="line">			id team = [Team team]; </div><div class="line">			[[team.name should] equal:@&quot;Black Hawks&quot;];</div><div class="line">		 &#125;); </div><div class="line">		 it(@&quot;should have 11 players&quot;, ^&#123; </div><div class="line">			 id team = [Team team]; </div><div class="line">			 [[[team should] have:11] players]; </div><div class="line">		 &#125;); </div><div class="line">	&#125;); </div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+<p>可以根据上文提到的<code>Given-When-Then</code>三段式理解为：</p>
+<blockquote>
+<p>Given a team, when newly created, it should have a name, and should have 11 players</p>
+</blockquote>
+<p>可见相比TDD更加接近自然语言的描述，大大增强了可读性和可维护性。</p>
+<h4 id="Kiwi的安装"><a href="#Kiwi的安装" class="headerlink" title="Kiwi的安装"></a>Kiwi的安装</h4><p>Kiwi的安装请主要参考Kiwi在github上的项目<a href="https://github.com/kiwi-bdd/Kiwi/wiki/Getting-Started-with-Kiwi-2.0" target="_blank" rel="external">wiki</a>。总体上的思路是，先在电脑上安装CocoaPods，再使用CocoaPods来安装Kiwi。安装完成之后，建立Kiwi的测试文件，然后运行测试。整个流程比较复杂，而且一不小心弄错了的话，很容易测试失败。</p>
+<p>另外，安装CocoaPods的时候，也有一些坑，新手可以参考<a href="http://blog.devtang.com/blog/2014/05/25/use-cocoapod-to-manage-ios-lib-dependency/" target="_blank" rel="external">这篇教程</a>。安装好之后，再次打开项目需要使用<code>.xcworkspace</code>文件，而不是原来的项目文件。</p>
+<p><img src="./使用哪个项目文件.png" alt=""></p>
+<p>不使用CocoaPods，直接安装Kiwi也是可行的，但更加麻烦。要直接安装的，请自行参考Kiwi在github上的wiki。</p>
+<h4 id="Kiwi的使用"><a href="#Kiwi的使用" class="headerlink" title="Kiwi的使用"></a>Kiwi的使用</h4><p>为测试Kiwi能否正常运行，我们写了一个简单的测试。运行结果如下图：</p>
+<p><img src="./kiwiResult.png" alt=""></p>
+<p>可见两个测试文件都进行了测试，下方的log区域中，先进行的Kiwi的BDD测试，然后运行的是我们之前写的TDD测试。</p>
+<p>下面我们继续进行Calculator类的行为驱动开发。老规矩，还是先写测试代码：</p>
+<p><img src="./加入乘法测试.png" alt=""></p>
+<p>然后，到我们的Caldulator类中去实现乘法功能：</p>
+<p><img src="./乘法头文件.png" alt=""></p>
+<p><img src="./乘法实现.png" alt=""></p>
+<p>应该是没有问题，运行测试：</p>
+<p><img src="./乘法通过.png" alt=""></p>
+<p>测试全部通过。以上我们说的，主要是BDD相对于TDD的第一个优势：可读性好和可维护性好。接下来的stub和mock部分，是关于BDD的第二个优势：代码之间依赖性很强的时候如何进行测试。</p>
+<h4 id="Stub"><a href="#Stub" class="headerlink" title="Stub"></a>Stub</h4><p>待补充，主要功能是模仿一个函数的功能，从而避免测试时对原来方法的依赖。</p>
+<h4 id="Mock"><a href="#Mock" class="headerlink" title="Mock"></a>Mock</h4><p>待补充，可以看做是stub的进阶版，能模仿一个类的功能，避免测试时对这个类的依赖。</p>
+<h4 id="注意"><a href="#注意" class="headerlink" title="注意"></a>注意</h4><p>测试驱动开发需要注意测试过度的问题。驱动测试开发的主要目的，是保证项目的关键特性的正确性和主体流程能够被正确执行下来。并不能代替单元测试的功能。如果TDD使用过度，反而会造成项目进度缓慢。请参考下面这篇<a href="http://www.vaikan.com/that-is-not-tdd/" target="_blank" rel="external">文章</a>。</p>
+<h2 id="单元测试"><a href="#单元测试" class="headerlink" title="单元测试"></a>单元测试</h2><p>单元测试的方法跟TDD和BDD基本是一样的，区别在于，单元测试是在完成代码之后再进行测试。而且，单元测试注重的是代码的正确性，要保证测试的覆盖率，不需要像BDD和TDD一样考虑测试时的效率。</p>
+<h3 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h3><p>实际项目中，修改了一个Bug：使用遥控器更改空调定时开/关后，不能同步到手机。修改完成之后，对修改的方法进行测试。</p>
+<p>源代码因为保密原因不能展示。这个方法接受三个参数：距离预约的空调开/关机时间的分钟数，开始计算的时间，输出结果为预约的最终时间。</p>
+<p>测试代码：</p>
+<p><img src="./单元测试实现.png" alt=""></p>
+<p>测试考虑了各种不同的情况，尽量保证测试的全面性。</p>
+<h2 id="Preferences"><a href="#Preferences" class="headerlink" title="Preferences:"></a>Preferences:</h2><p>[1]  王巍 <a href="http://onevcat.com/2014/02/ios-test-with-kiwi/" target="_blank" rel="external">TDD的iOS开发初步以及Kiwi使用入门</a> </p>
+<p>[2]  王巍 <a href="http://onevcat.com/2014/05/kiwi-mock-stub-test/" target="_blank" rel="external">Kiwi 使用进阶 Mock, Stub, 参数捕获和异步测试</a></p>
+<p>[3]  唐巧 <a href="http://blog.devtang.com/blog/2014/05/25/use-cocoapod-to-manage-ios-lib-dependency/" target="_blank" rel="external">用CocoaPods做iOS程序的依赖管理</a></p>
+
+  </section>
+
+  
+
+<section class="post-comments">
+  <div id="disqus_thread"></div>
+  <script type="text/javascript">
+      var disqus_shortname = 'hanyinggarden'; 
+      /* * * DON'T EDIT BELOW THIS LINE * * */
+      (function() {
+          var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+          dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+          (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+      })();
+  </script>
+  <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</section>
+
+
+  
+</article>
+
+
+            <footer class="footer">
+
+    <span class="footer__copyright">&copy; 2017. Zhang Hanying. | 由<a href="https://hexo.io/">Hexo</a>强力驱动 | 主题<a href="https://github.com/someus/huno">Huno</a></span>
+    
+</footer>
+        </div>
+    </div>
+
+    <!-- js files -->
+    <script src="/js/jquery.min.js"></script>
+    <script src="/js/main.js"></script>
+    <script src="/js/scale.fix.js"></script>
+    
+
+    
+
+    <script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript"> 
+        $(document).ready(function(){
+            MathJax.Hub.Config({ 
+                tex2jax: {inlineMath: [['[latex]','[/latex]'], ['\\(','\\)']]} 
+            });
+        });
+    </script>
+
+
+    
+
+    <script src="/js/awesome-toc.min.js"></script>
+    <script>
+        $(document).ready(function(){
+            $.awesome_toc({
+                overlay: true,
+                contentId: "post-content",
+            });
+        });
+    </script>
+
+
+    
+    
+
+    <script src="/js/jquery.githubRepoWidget.min.js"></script>
+
+
+    <!--kill ie6 -->
+<!--[if IE 6]>
+  <script src="//letskillie6.googlecode.com/svn/trunk/2/zh_CN.js"></script>
+<![endif]-->
+
+</body>
+</html>

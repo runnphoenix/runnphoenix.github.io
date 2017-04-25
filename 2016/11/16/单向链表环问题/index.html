@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+
+    
+
+    <title>
+      单向链表环问题 | Hanying Garden 
+    </title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    
+      <meta name="author" content="Zhang Hanying">
+    
+    
+
+    <meta name="description" content="问题描述判断一个单向链表是否有环，如果有环的话，找出环的入口。 分析用遍历然后判断能不能到结尾（变成NULL）的方法不行，因为链表的长度未知，万一是个非常长但是没有环的呢 这个算法用了两个指针，一个快，一次走两个节点，一个慢，一次走一个节点 如果两个指针重合了，就表示有环，否则没环 而且在慢指针遍历完所有节点之前，就能重合 这个地方就不太好理解 而且我发现，网上的文章，大部分也没有理解到位 有环的">
+<meta name="keywords" content="算法">
+<meta property="og:type" content="article">
+<meta property="og:title" content="单向链表环问题 | Hanying Garden">
+<meta property="og:url" content="http://hanyinggarden.net/2016/11/16/单向链表环问题/index.html">
+<meta property="og:site_name" content="Hanying Garden">
+<meta property="og:description" content="问题描述判断一个单向链表是否有环，如果有环的话，找出环的入口。 分析用遍历然后判断能不能到结尾（变成NULL）的方法不行，因为链表的长度未知，万一是个非常长但是没有环的呢 这个算法用了两个指针，一个快，一次走两个节点，一个慢，一次走一个节点 如果两个指针重合了，就表示有环，否则没环 而且在慢指针遍历完所有节点之前，就能重合 这个地方就不太好理解 而且我发现，网上的文章，大部分也没有理解到位 有环的">
+<meta property="og:updated_time" content="2017-04-25T12:01:26.625Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="单向链表环问题 | Hanying Garden">
+<meta name="twitter:description" content="问题描述判断一个单向链表是否有环，如果有环的话，找出环的入口。 分析用遍历然后判断能不能到结尾（变成NULL）的方法不行，因为链表的长度未知，万一是个非常长但是没有环的呢 这个算法用了两个指针，一个快，一次走两个节点，一个慢，一次走一个节点 如果两个指针重合了，就表示有环，否则没环 而且在慢指针遍历完所有节点之前，就能重合 这个地方就不太好理解 而且我发现，网上的文章，大部分也没有理解到位 有环的">
+    
+    
+    
+      <link rel="icon" type="image/x-icon" href="/favicon.png">
+    
+    <link rel="stylesheet" href="/css/uno.css">
+    <link rel="stylesheet" href="/css/highlight.css">
+    <link rel="stylesheet" href="/css/archive.css">
+    <link rel="stylesheet" href="/css/china-social-icon.css">
+
+</head>
+<body>
+
+    <span class="mobile btn-mobile-menu">
+        <i class="icon icon-list btn-mobile-menu__icon"></i>
+        <i class="icon icon-x-circle btn-mobile-close__icon hidden"></i>
+    </span>
+
+    
+
+<header class="panel-cover panel-cover--collapsed">
+
+
+  <div class="panel-main">
+
+  
+    <div class="panel-main__inner panel-inverted">
+    <div class="panel-main__content">
+
+        
+
+        <h1 class="panel-cover__title panel-title"><a href="/" title="link to homepage">Hanying Garden</a></h1>
+        <hr class="panel-cover__divider" />
+
+        
+        <p class="panel-cover__description">
+          自律 面对
+        </p>
+        <hr class="panel-cover__divider panel-cover__divider--secondary" />
+        
+
+        <div class="navigation-wrapper">
+
+          <nav class="cover-navigation cover-navigation--primary">
+            <ul class="navigation">
+
+              
+                
+                <li class="navigation__item"><a href="/#blog" title="" class="blog-button">首页</a></li>
+              
+                
+                <li class="navigation__item"><a href="/about" title="" class="">关于</a></li>
+              
+
+            </ul>
+          </nav>
+
+          <!-- ----------------------------
+To add a new social icon simply duplicate one of the list items from below
+and change the class in the <i> tag to match the desired social network
+and then add your link to the <a>. Here is a full list of social network
+classes that you can use:
+
+    icon-social-500px
+    icon-social-behance
+    icon-social-delicious
+    icon-social-designer-news
+    icon-social-deviant-art
+    icon-social-digg
+    icon-social-dribbble
+    icon-social-facebook
+    icon-social-flickr
+    icon-social-forrst
+    icon-social-foursquare
+    icon-social-github
+    icon-social-google-plus
+    icon-social-hi5
+    icon-social-instagram
+    icon-social-lastfm
+    icon-social-linkedin
+    icon-social-medium
+    icon-social-myspace
+    icon-social-path
+    icon-social-pinterest
+    icon-social-rdio
+    icon-social-reddit
+    icon-social-skype
+    icon-social-spotify
+    icon-social-stack-overflow
+    icon-social-steam
+    icon-social-stumbleupon
+    icon-social-treehouse
+    icon-social-tumblr
+    icon-social-twitter
+    icon-social-vimeo
+    icon-social-xbox
+    icon-social-yelp
+    icon-social-youtube
+    icon-social-zerply
+    icon-mail
+
+-------------------------------->
+
+<!-- add social info here -->
+
+
+
+        </div>
+
+      </div>
+
+    </div>
+
+    <div class="panel-cover--overlay"></div>
+  </div>
+</header>
+
+    <div class="content-wrapper">
+        <div class="content-wrapper__inner entry">
+            
+
+<article class="post-container post-container--single">
+
+  <header class="post-header">
+    
+    <h1 class="post-title">单向链表环问题</h1>
+
+    
+
+    <div class="post-meta">
+      <time datetime="2016-11-16" class="post-meta__date date">2016-11-16</time> 
+
+      <span class="post-meta__tags tags">
+
+          
+
+          
+             &#8226; 标签:
+            <font class="tags">
+              <a class="tags-link" href="/tags/算法/">算法</a>
+            </font>
+          
+
+      </span>
+    </div>
+    
+    
+
+  </header>
+
+  <section id="post-content" class="article-content post">
+    <h3 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h3><p>判断一个单向链表是否有环，如果有环的话，找出环的入口。</p>
+<h3 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h3><p>用遍历然后判断能不能到结尾（变成NULL）的方法不行，因为链表的长度未知，万一是个非常长但是没有环的呢</p>
+<p>这个算法用了两个指针，一个快，一次走两个节点，一个慢，一次走一个节点</p>
+<p>如果两个指针重合了，就表示有环，否则没环</p>
+<p>而且在慢指针遍历完所有节点之前，就能重合</p>
+<p>这个地方就不太好理解</p>
+<p>而且我发现，网上的文章，大部分也没有理解到位</p>
+<p>有环的情况下一定能“赶上”，是因为，慢指针一旦进入环，在跑完第一圈的过程中，一定会被快指针追上，因为快指针能跑两圈</p>
+<p>考虑极端情况，慢指针进环的时候，快指针刚过起点，这种情况也还是能被追上的</p>
+<p>但是还有一个问题，快指针一次跑两个节点，如果刚好跨过了慢指针呢？</p>
+<p>答案是不存在这种可能，只有在出发点一致的情况下才会出现“跨过”这种情况</p>
+<p>如果上一轮只差一步，那这一轮就刚好重合</p>
+<p>“跨过”这个问题，是我自己琢磨的，琢磨了半天才明白</p>
+<p>总之，这个算法的关键（有环的情况下），在于快指针会在环里转圈等慢指针，然后一定会在慢指针进环的第一圈里追上慢指针</p>
+<p>说了半天也不知道你们有没有兴趣看，你们有兴趣的话，我在说怎么判断环的入口吧，就觉得这个算法很巧妙，而且需要自己琢磨才能真正明白，光看一遍觉得很有道理，其实没有掌握</p>
+
+  </section>
+
+  
+
+<section class="post-comments">
+  <div id="disqus_thread"></div>
+  <script type="text/javascript">
+      var disqus_shortname = 'hanyinggarden'; 
+      /* * * DON'T EDIT BELOW THIS LINE * * */
+      (function() {
+          var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+          dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+          (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+      })();
+  </script>
+  <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</section>
+
+
+  
+</article>
+
+
+            <footer class="footer">
+
+    <span class="footer__copyright">&copy; 2017. Zhang Hanying. | 由<a href="https://hexo.io/">Hexo</a>强力驱动 | 主题<a href="https://github.com/someus/huno">Huno</a></span>
+    
+</footer>
+        </div>
+    </div>
+
+    <!-- js files -->
+    <script src="/js/jquery.min.js"></script>
+    <script src="/js/main.js"></script>
+    <script src="/js/scale.fix.js"></script>
+    
+
+    
+
+    <script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript"> 
+        $(document).ready(function(){
+            MathJax.Hub.Config({ 
+                tex2jax: {inlineMath: [['[latex]','[/latex]'], ['\\(','\\)']]} 
+            });
+        });
+    </script>
+
+
+    
+
+    <script src="/js/awesome-toc.min.js"></script>
+    <script>
+        $(document).ready(function(){
+            $.awesome_toc({
+                overlay: true,
+                contentId: "post-content",
+            });
+        });
+    </script>
+
+
+    
+    
+
+    <script src="/js/jquery.githubRepoWidget.min.js"></script>
+
+
+    <!--kill ie6 -->
+<!--[if IE 6]>
+  <script src="//letskillie6.googlecode.com/svn/trunk/2/zh_CN.js"></script>
+<![endif]-->
+
+</body>
+</html>
