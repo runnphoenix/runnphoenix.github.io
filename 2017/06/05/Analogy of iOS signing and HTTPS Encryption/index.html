@@ -16,18 +16,18 @@
     
     
 
-    <meta name="description" content="iOS代码签名机制和HTTPS加密的类比Intro为了不再跌iOS签名机制的巨坑，仔细研究了其机制。并顺带研究了一下HTTPS的加密机制，希望能总结出一些通用的规律。 RSA原理 这一节并没有涉及到RSA加密的数学原理，只能算是一个粗略的介绍，想要了解详细原理的请移步至参考资料[1]和[2]。而且即便只是一个简介，本部分仍可略过不读。  密钥生成过程 找两个质数p和q 计算n = p  q, ɸ(">
+    <meta name="description" content="title: iOS代码签名机制和HTTPS加密的类比category: iOS, Security iOS代码签名机制和HTTPS加密的类比Intro为了不再跌iOS签名机制的巨坑，仔细研究了其机制。并顺带研究了一下HTTPS的加密机制，希望能总结出一些通用的规律。 RSA原理 这一节并没有涉及到RSA加密的数学原理，只能算是一个粗略的介绍，想要了解详细原理的请移步至参考资料[1]和[2]。而且">
 <meta name="keywords">
 <meta property="og:type" content="article">
 <meta property="og:title" content=" | Hanying Garden">
 <meta property="og:url" content="http://hanyinggarden.net/2017/06/05/Analogy of iOS signing and HTTPS Encryption/index.html">
 <meta property="og:site_name" content="Hanying Garden">
-<meta property="og:description" content="iOS代码签名机制和HTTPS加密的类比Intro为了不再跌iOS签名机制的巨坑，仔细研究了其机制。并顺带研究了一下HTTPS的加密机制，希望能总结出一些通用的规律。 RSA原理 这一节并没有涉及到RSA加密的数学原理，只能算是一个粗略的介绍，想要了解详细原理的请移步至参考资料[1]和[2]。而且即便只是一个简介，本部分仍可略过不读。  密钥生成过程 找两个质数p和q 计算n = p  q, ɸ(">
+<meta property="og:description" content="title: iOS代码签名机制和HTTPS加密的类比category: iOS, Security iOS代码签名机制和HTTPS加密的类比Intro为了不再跌iOS签名机制的巨坑，仔细研究了其机制。并顺带研究了一下HTTPS的加密机制，希望能总结出一些通用的规律。 RSA原理 这一节并没有涉及到RSA加密的数学原理，只能算是一个粗略的介绍，想要了解详细原理的请移步至参考资料[1]和[2]。而且">
 <meta property="og:image" content="http://blog.cnbang.net/wp-content/uploads/2017/03/sign4.png">
-<meta property="og:updated_time" content="2017-06-05T04:26:48.471Z">
+<meta property="og:updated_time" content="2017-06-05T04:31:24.757Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content=" | Hanying Garden">
-<meta name="twitter:description" content="iOS代码签名机制和HTTPS加密的类比Intro为了不再跌iOS签名机制的巨坑，仔细研究了其机制。并顺带研究了一下HTTPS的加密机制，希望能总结出一些通用的规律。 RSA原理 这一节并没有涉及到RSA加密的数学原理，只能算是一个粗略的介绍，想要了解详细原理的请移步至参考资料[1]和[2]。而且即便只是一个简介，本部分仍可略过不读。  密钥生成过程 找两个质数p和q 计算n = p  q, ɸ(">
+<meta name="twitter:description" content="title: iOS代码签名机制和HTTPS加密的类比category: iOS, Security iOS代码签名机制和HTTPS加密的类比Intro为了不再跌iOS签名机制的巨坑，仔细研究了其机制。并顺带研究了一下HTTPS的加密机制，希望能总结出一些通用的规律。 RSA原理 这一节并没有涉及到RSA加密的数学原理，只能算是一个粗略的介绍，想要了解详细原理的请移步至参考资料[1]和[2]。而且">
 <meta name="twitter:image" content="http://blog.cnbang.net/wp-content/uploads/2017/03/sign4.png">
     
     
@@ -215,7 +215,8 @@ classes that you can use:
   </header>
 
   <section id="post-content" class="article-content post">
-    <h1 id="iOS代码签名机制和HTTPS加密的类比"><a href="#iOS代码签名机制和HTTPS加密的类比" class="headerlink" title="iOS代码签名机制和HTTPS加密的类比"></a>iOS代码签名机制和HTTPS加密的类比</h1><h2 id="Intro"><a href="#Intro" class="headerlink" title="Intro"></a>Intro</h2><p>为了不再跌iOS签名机制的巨坑，仔细研究了其机制。并顺带研究了一下HTTPS的加密机制，希望能总结出一些通用的规律。</p>
+    <p>title: iOS代码签名机制和HTTPS加密的类比<br>category: iOS, Security</p>
+<h1 id="iOS代码签名机制和HTTPS加密的类比"><a href="#iOS代码签名机制和HTTPS加密的类比" class="headerlink" title="iOS代码签名机制和HTTPS加密的类比"></a>iOS代码签名机制和HTTPS加密的类比</h1><h2 id="Intro"><a href="#Intro" class="headerlink" title="Intro"></a>Intro</h2><p>为了不再跌iOS签名机制的巨坑，仔细研究了其机制。并顺带研究了一下HTTPS的加密机制，希望能总结出一些通用的规律。</p>
 <h2 id="RSA原理"><a href="#RSA原理" class="headerlink" title="RSA原理"></a>RSA原理</h2><blockquote>
 <p>这一节并没有涉及到RSA加密的数学原理，只能算是一个粗略的介绍，想要了解详细原理的请移步至参考资料[1]和[2]。而且即便只是一个简介，本部分仍可略过不读。</p>
 </blockquote>
