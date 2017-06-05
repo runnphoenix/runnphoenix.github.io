@@ -7,7 +7,7 @@
     
 
     <title>
-       | Hanying Garden 
+      iOS代码签名机制和HTTPS加密的类比 | Hanying Garden 
     </title>
 
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
@@ -16,18 +16,18 @@
     
     
 
-    <meta name="description" content="title: iOS代码签名机制和HTTPS加密的类比category: iOS, Security iOS代码签名机制和HTTPS加密的类比Intro为了不再跌iOS签名机制的巨坑，仔细研究了其机制。并顺带研究了一下HTTPS的加密机制，希望能总结出一些通用的规律。 RSA原理 这一节并没有涉及到RSA加密的数学原理，只能算是一个粗略的介绍，想要了解详细原理的请移步至参考资料[1]和[2]。而且">
+    <meta name="description" content="Intro为了不再跌iOS签名机制的巨坑，仔细研究了其机制。并顺带研究了一下HTTPS的加密机制，希望能总结出一些通用的规律。 RSA原理 这一节并没有涉及到RSA加密的数学原理，只能算是一个粗略的介绍，想要了解详细原理的请移步至参考资料[1]和[2]。而且即便只是一个简介，本部分仍可略过不读。  密钥生成过程 找两个质数p和q 计算n = p  q, ɸ(n) = (p-1)  (q-1) （ɸ">
 <meta name="keywords">
 <meta property="og:type" content="article">
-<meta property="og:title" content=" | Hanying Garden">
+<meta property="og:title" content="iOS代码签名机制和HTTPS加密的类比 | Hanying Garden">
 <meta property="og:url" content="http://hanyinggarden.net/2017/06/05/Analogy of iOS signing and HTTPS Encryption/index.html">
 <meta property="og:site_name" content="Hanying Garden">
-<meta property="og:description" content="title: iOS代码签名机制和HTTPS加密的类比category: iOS, Security iOS代码签名机制和HTTPS加密的类比Intro为了不再跌iOS签名机制的巨坑，仔细研究了其机制。并顺带研究了一下HTTPS的加密机制，希望能总结出一些通用的规律。 RSA原理 这一节并没有涉及到RSA加密的数学原理，只能算是一个粗略的介绍，想要了解详细原理的请移步至参考资料[1]和[2]。而且">
+<meta property="og:description" content="Intro为了不再跌iOS签名机制的巨坑，仔细研究了其机制。并顺带研究了一下HTTPS的加密机制，希望能总结出一些通用的规律。 RSA原理 这一节并没有涉及到RSA加密的数学原理，只能算是一个粗略的介绍，想要了解详细原理的请移步至参考资料[1]和[2]。而且即便只是一个简介，本部分仍可略过不读。  密钥生成过程 找两个质数p和q 计算n = p  q, ɸ(n) = (p-1)  (q-1) （ɸ">
 <meta property="og:image" content="http://blog.cnbang.net/wp-content/uploads/2017/03/sign4.png">
-<meta property="og:updated_time" content="2017-06-05T04:31:24.757Z">
+<meta property="og:updated_time" content="2017-06-05T04:38:40.110Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content=" | Hanying Garden">
-<meta name="twitter:description" content="title: iOS代码签名机制和HTTPS加密的类比category: iOS, Security iOS代码签名机制和HTTPS加密的类比Intro为了不再跌iOS签名机制的巨坑，仔细研究了其机制。并顺带研究了一下HTTPS的加密机制，希望能总结出一些通用的规律。 RSA原理 这一节并没有涉及到RSA加密的数学原理，只能算是一个粗略的介绍，想要了解详细原理的请移步至参考资料[1]和[2]。而且">
+<meta name="twitter:title" content="iOS代码签名机制和HTTPS加密的类比 | Hanying Garden">
+<meta name="twitter:description" content="Intro为了不再跌iOS签名机制的巨坑，仔细研究了其机制。并顺带研究了一下HTTPS的加密机制，希望能总结出一些通用的规律。 RSA原理 这一节并没有涉及到RSA加密的数学原理，只能算是一个粗略的介绍，想要了解详细原理的请移步至参考资料[1]和[2]。而且即便只是一个简介，本部分仍可略过不读。  密钥生成过程 找两个质数p和q 计算n = p  q, ɸ(n) = (p-1)  (q-1) （ɸ">
 <meta name="twitter:image" content="http://blog.cnbang.net/wp-content/uploads/2017/03/sign4.png">
     
     
@@ -194,7 +194,7 @@ classes that you can use:
 
   <header class="post-header">
     
-    <h1 class="post-title"></h1>
+    <h1 class="post-title">iOS代码签名机制和HTTPS加密的类比</h1>
 
     
 
@@ -203,6 +203,11 @@ classes that you can use:
 
       <span class="post-meta__tags tags">
 
+          
+            <font class="categories">
+            &#8226; 分类:
+            <a class="categories-link" href="/categories/iOS-Security/">iOS, Security</a>
+            </font>
           
 
           
@@ -215,8 +220,7 @@ classes that you can use:
   </header>
 
   <section id="post-content" class="article-content post">
-    <p>title: iOS代码签名机制和HTTPS加密的类比<br>category: iOS, Security</p>
-<h1 id="iOS代码签名机制和HTTPS加密的类比"><a href="#iOS代码签名机制和HTTPS加密的类比" class="headerlink" title="iOS代码签名机制和HTTPS加密的类比"></a>iOS代码签名机制和HTTPS加密的类比</h1><h2 id="Intro"><a href="#Intro" class="headerlink" title="Intro"></a>Intro</h2><p>为了不再跌iOS签名机制的巨坑，仔细研究了其机制。并顺带研究了一下HTTPS的加密机制，希望能总结出一些通用的规律。</p>
+    <h2 id="Intro"><a href="#Intro" class="headerlink" title="Intro"></a>Intro</h2><p>为了不再跌iOS签名机制的巨坑，仔细研究了其机制。并顺带研究了一下HTTPS的加密机制，希望能总结出一些通用的规律。</p>
 <h2 id="RSA原理"><a href="#RSA原理" class="headerlink" title="RSA原理"></a>RSA原理</h2><blockquote>
 <p>这一节并没有涉及到RSA加密的数学原理，只能算是一个粗略的介绍，想要了解详细原理的请移步至参考资料[1]和[2]。而且即便只是一个简介，本部分仍可略过不读。</p>
 </blockquote>
@@ -231,7 +235,7 @@ classes that you can use:
 <p>由密钥生成的第4步，要想求出d，必须先求出ɸ(n)。再由第二步得知，必须先求出p和q。至此，问题归结为将n分解为质数p和q。而大整数的因数分解，目前只有暴力破解一种方式。正式对大整数因数分解的难度决定了RSA算法的可靠性。只要密钥足够长，用RSA加密的信息目前为止是不能被破解的。</p>
 <h3 id="为什么私钥长度更长"><a href="#为什么私钥长度更长" class="headerlink" title="为什么私钥长度更长"></a>为什么私钥长度更长</h3><p>实际应用中，为了更快的实现速度，私钥不单单包括n和d，还包括了e、p、q等，因此长度更长。</p>
 <h3 id="公钥私钥的本质和区别"><a href="#公钥私钥的本质和区别" class="headerlink" title="公钥私钥的本质和区别"></a>公钥私钥的本质和区别</h3><p>抛开私钥本身包含更多的信息这一点，从<strong><code>功能</code></strong>上来说，公钥私钥本身没有太大的差别。公钥加密的信息私钥可以解密，私钥加密的信息公钥也可以解密。两者的差别主要是<strong><code>用途</code></strong>不同导致的：私钥被保存在本地，而公钥则被公布。</p>
-<h2 id="通信加密、数字签名和数字证书"><a href="#通信加密、数字签名和数字证书" class="headerlink" title="通信加密、数字签名和数字证书"></a>通信加密、<code>数字签名</code>和<code>数字证书</code></h2><blockquote>
+<h2 id="通信加密、数字签名和数字证书"><a href="#通信加密、数字签名和数字证书" class="headerlink" title="通信加密、数字签名和数字证书"></a>通信加密、数字签名和数字证书</h2><blockquote>
 <p>这一节至关重要，请务必理解之后再往下读，而且理解了以后，接下来的内容也就水到渠成了。</p>
 </blockquote>
 <h3 id="通信加密"><a href="#通信加密" class="headerlink" title="通信加密"></a>通信加密</h3><p>假设A想要同B通信，A需要将消息用B的公钥加密以后发给B，B用私钥解密以后就能看到消息内容了，而且因为私钥只有B才有，所以只有B才能看到消息内容。这样，只要是有B的公钥的人，都可以安全的发消息给B了。</p>
