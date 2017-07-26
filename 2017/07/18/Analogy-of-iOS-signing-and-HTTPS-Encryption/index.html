@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+
+    
+
+    <title>
+      iOS代码签名机制和HTTPS加密的类比 | Hanying Garden 
+    </title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    
+      <meta name="author" content="Zhang Hanying">
+    
+    
+
+    <meta name="description" content="iOS代码签名机制本质上只不过是RSA加密的一次应用，但却成为了很多iOS开发者的噩梦。究其原因，iOS开发虽然入门简单，做深做精却不易，计算机理论知识还是需要补足。。">
+<meta name="keywords">
+<meta property="og:type" content="article">
+<meta property="og:title" content="iOS代码签名机制和HTTPS加密的类比 | Hanying Garden">
+<meta property="og:url" content="http://hanyinggarden.net/2017/07/18/Analogy-of-iOS-signing-and-HTTPS-Encryption/index.html">
+<meta property="og:site_name" content="Hanying Garden">
+<meta property="og:description" content="iOS代码签名机制本质上只不过是RSA加密的一次应用，但却成为了很多iOS开发者的噩梦。究其原因，iOS开发虽然入门简单，做深做精却不易，计算机理论知识还是需要补足。。">
+<meta property="og:image" content="http://blog.cnbang.net/wp-content/uploads/2017/03/sign4.png">
+<meta property="og:updated_time" content="2017-07-02T15:38:08.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="iOS代码签名机制和HTTPS加密的类比 | Hanying Garden">
+<meta name="twitter:description" content="iOS代码签名机制本质上只不过是RSA加密的一次应用，但却成为了很多iOS开发者的噩梦。究其原因，iOS开发虽然入门简单，做深做精却不易，计算机理论知识还是需要补足。。">
+<meta name="twitter:image" content="http://blog.cnbang.net/wp-content/uploads/2017/03/sign4.png">
+    
+    
+    
+      <link rel="icon" type="image/x-icon" href="/favicon.png">
+    
+    <link rel="stylesheet" href="/css/uno.css">
+    <link rel="stylesheet" href="/css/highlight.css">
+    <link rel="stylesheet" href="/css/archive.css">
+    <link rel="stylesheet" href="/css/china-social-icon.css">
+
+</head>
+<body>
+
+    <span class="mobile btn-mobile-menu">
+        <i class="icon icon-list btn-mobile-menu__icon"></i>
+        <i class="icon icon-x-circle btn-mobile-close__icon hidden"></i>
+    </span>
+
+    
+
+<header class="panel-cover panel-cover--collapsed">
+
+
+  <div class="panel-main">
+
+  
+    <div class="panel-main__inner panel-inverted">
+    <div class="panel-main__content">
+
+        
+
+        <h1 class="panel-cover__title panel-title"><a href="/" title="link to homepage">Hanying Garden</a></h1>
+        <hr class="panel-cover__divider" />
+
+        
+        <p class="panel-cover__description">
+          自律 面对
+        </p>
+        <hr class="panel-cover__divider panel-cover__divider--secondary" />
+        
+
+        <div class="navigation-wrapper">
+
+          <nav class="cover-navigation cover-navigation--primary">
+            <ul class="navigation">
+
+              
+                
+                <li class="navigation__item"><a href="/#blog" title="" class="blog-button">首页</a></li>
+              
+                
+                <li class="navigation__item"><a href="/about" title="" class="">关于</a></li>
+              
+
+            </ul>
+          </nav>
+
+          <!-- ----------------------------
+To add a new social icon simply duplicate one of the list items from below
+and change the class in the <i> tag to match the desired social network
+and then add your link to the <a>. Here is a full list of social network
+classes that you can use:
+
+    icon-social-500px
+    icon-social-behance
+    icon-social-delicious
+    icon-social-designer-news
+    icon-social-deviant-art
+    icon-social-digg
+    icon-social-dribbble
+    icon-social-facebook
+    icon-social-flickr
+    icon-social-forrst
+    icon-social-foursquare
+    icon-social-github
+    icon-social-google-plus
+    icon-social-hi5
+    icon-social-instagram
+    icon-social-lastfm
+    icon-social-linkedin
+    icon-social-medium
+    icon-social-myspace
+    icon-social-path
+    icon-social-pinterest
+    icon-social-rdio
+    icon-social-reddit
+    icon-social-skype
+    icon-social-spotify
+    icon-social-stack-overflow
+    icon-social-steam
+    icon-social-stumbleupon
+    icon-social-treehouse
+    icon-social-tumblr
+    icon-social-twitter
+    icon-social-vimeo
+    icon-social-xbox
+    icon-social-yelp
+    icon-social-youtube
+    icon-social-zerply
+    icon-mail
+
+-------------------------------->
+
+<!-- add social info here -->
+
+
+
+<nav class="cover-navigation navigation--social">
+  <ul class="navigation">
+
+    
+      <!-- Github -->
+      <li class="navigation__item">
+        <a href="https://github.com/runnphoenix" title="My GitHub Page">
+          <i class='icon icon-social-github'></i>
+          <span class="label">GitHub</span>
+        </a>
+      </li>
+    
+
+    <!-- China social icon -->
+    <!--
+    
+      <li class="navigation__item">
+        <a href="" title="">
+          <i class='icon cs-icon-douban'></i>
+          <span class="label">Douban</span>
+        </a>
+      </li>
+
+      <li class="navigation__item">
+        <a href="" title="">
+          <i class='icon cs-icon-weibo'></i>
+          <span class="label">Weibo</span>
+        </a>
+      </li>
+
+    -->
+
+
+
+  </ul>
+</nav>
+
+
+
+
+        </div>
+
+      </div>
+
+    </div>
+
+    <div class="panel-cover--overlay"></div>
+  </div>
+</header>
+
+    <div class="content-wrapper">
+        <div class="content-wrapper__inner entry">
+            
+
+<article class="post-container post-container--single">
+
+  <header class="post-header">
+    
+    <h1 class="post-title">iOS代码签名机制和HTTPS加密的类比</h1>
+
+    
+
+    <div class="post-meta">
+      <time datetime="2017-07-18" class="post-meta__date date">2017-07-18</time> 
+
+      <span class="post-meta__tags tags">
+
+          
+            <font class="categories">
+            &#8226; 分类:
+            <a class="categories-link" href="/categories/iOS-Security/">iOS, Security</a>
+            </font>
+          
+
+          
+
+      </span>
+    </div>
+    
+    
+
+  </header>
+
+  <section id="post-content" class="article-content post">
+    <p>iOS代码签名机制本质上只不过是RSA加密的一次应用，但却成为了很多iOS开发者的噩梦。究其原因，iOS开发虽然入门简单，做深做精却不易，计算机理论知识还是需要补足。。<br><a id="more"></a></p>
+<h2 id="Intro"><a href="#Intro" class="headerlink" title="Intro"></a>Intro</h2><p>为了不再跌iOS签名机制的巨坑，仔细研究了其机制。并顺带研究了一下HTTPS的加密机制希望能总结出一些通用的规律。</p>
+<h2 id="RSA原理"><a href="#RSA原理" class="headerlink" title="RSA原理"></a>RSA原理</h2><blockquote>
+<p>这一节并没有涉及到RSA加密的数学原理，只能算是一个粗略的介绍，想要了解详细原理的请移步至参考资料[1]和[2]。而且即便只是一个简介，本部分仍可略过不读。</p>
+</blockquote>
+<h3 id="密钥生成过程"><a href="#密钥生成过程" class="headerlink" title="密钥生成过程"></a>密钥生成过程</h3><ol>
+<li>找两个质数p和q</li>
+<li>计算n = p <em> q, ɸ(n) = (p-1) </em> (q-1) （ɸ(n)表示在1-n范围内，有多少个整数与n互质）</li>
+<li>在1到n中，随机选择一个与n互质的数e（一般选65537）</li>
+<li>计算d，满足 ed = 1(mod ɸ(n))</li>
+<li>n和e组成公钥，n和d组成私钥</li>
+</ol>
+<h3 id="安全性验证"><a href="#安全性验证" class="headerlink" title="安全性验证"></a>安全性验证</h3><p>安全性验证的问题，实际上就是在得知公钥的情况下，能否推导出私钥的问题。即：已知n和e，能否推导出d？</p>
+<p>由密钥生成的第4步，要想求出d，必须先求出ɸ(n)。再由第二步得知，必须先求出p和q。至此，问题归结为将n分解为质数p和q。而大整数的因数分解，目前只有暴力破解一种方式。正式对大整数因数分解的难度决定了RSA算法的可靠性。只要密钥足够长，用RSA加密的信息目前为止是不能被破解的。</p>
+<h3 id="为什么私钥长度更长"><a href="#为什么私钥长度更长" class="headerlink" title="为什么私钥长度更长"></a>为什么私钥长度更长</h3><p>实际应用中，为了更快的实现速度，私钥不单单包括n和d，还包括了e、p、q等，因此长度更长。</p>
+<h3 id="公钥私钥的本质和区别"><a href="#公钥私钥的本质和区别" class="headerlink" title="公钥私钥的本质和区别"></a>公钥私钥的本质和区别</h3><p>抛开私钥本身包含更多的信息这一点，从<strong><code>功能</code></strong>上来说，公钥私钥本身没有太大的差别。公钥加密的信息私钥可以解密，私钥加密的信息公钥也可以解密。两者的差别主要是<strong><code>用途</code></strong>不同导致的：私钥被保存在本地，而公钥则被公布。</p>
+<h2 id="通信加密、数字签名和数字证书"><a href="#通信加密、数字签名和数字证书" class="headerlink" title="通信加密、数字签名和数字证书"></a>通信加密、数字签名和数字证书</h2><blockquote>
+<p>这一节至关重要，请务必理解之后再往下读，而且理解了以后，接下来的内容也就水到渠成了。</p>
+</blockquote>
+<h3 id="通信加密"><a href="#通信加密" class="headerlink" title="通信加密"></a>通信加密</h3><p>假设A想要同B通信，A需要将消息用B的公钥加密以后发给B，B用私钥解密以后就能看到消息内容了，而且因为私钥只有B才有，所以只有B才能看到消息内容。这样，只要是有B的公钥的人，都可以安全的发消息给B了。</p>
+<h3 id="数字签名"><a href="#数字签名" class="headerlink" title="数字签名"></a>数字签名</h3><p>如果说通信加密主要是为了保证<code>隐私</code>，那么数字签名则是为了证明是<code>原创</code>。即收到数据的一方可以验证，收到的数据跟发出的时候是一致的，中间并没有被篡改过。</p>
+<p>从某种程度上来说，数字签名对私钥的使用与通信加密刚好是相反的。通信加密使用私钥来解密接收到的信息，而数字签名则是将自身的信息加密以后分享出去。</p>
+<p>数字签名的生成过程是这样的：首先将想要签名的信息做摘要（md5、SHA等摘要算法），然后将得到的摘要通过私钥加密，生成数字签名。最后，将原来的信息、数字签名、公钥三者一起合起来，发送给接收方。</p>
+<p>数字签名的验证：接受到数字签名以后，使用公钥将加密以后的摘要解密，然后，重新生成原信息的一份摘要，并跟解密得到的摘要进行比较，如果一致则表明信息没有被篡改过。</p>
+<h3 id="数字证书"><a href="#数字证书" class="headerlink" title="数字证书"></a>数字证书</h3><p>上述过程还存在一个很严重的问题：任何人都可以发送数字签名给接收方，数字签名只能保证数据在<strong>传输过程</strong>中没有被修改。那么，如何验证发送方的<strong>身份</strong>呢？</p>
+<p>解决方法就是让发送方去证书认证机构（CA）做认证。CA用自己的私钥，将发送方的公钥和一些相关信息进行加密，生成数字证书。现在，发送方不再发送自己的公钥，而是改为发送数字证书（如果你没有忘记的话，发送的另外两项内容是原文和数字签名）。</p>
+<p>验证过程：因为CA的公钥是伴随操作系统安装在本地的，只要操作系统不被攻破，就可以保证CA公钥的正确性。接收方接收到数据以后，首先用CA的公钥对数字证书进行解密，得到发送方的公钥。再以后，就可以拿发送方的公钥对数字签名进行验证了。</p>
+<p>数字证书本质上就是证明了自己所含公钥的身份正当性。</p>
+<h2 id="iOS签名机制"><a href="#iOS签名机制" class="headerlink" title="iOS签名机制"></a>iOS签名机制</h2><p>理论部分介绍完了，接下来我们介绍理论在iOS签名机制中的应用。iOS的签名机制中，苹果扮演了CA的角色。电脑是发送者，手机是接收者。</p>
+<p>首先，在电脑上生成一对密钥。然后将公钥交给苹果去做认证，得到证书（.cer）文件。</p>
+<p>至此，流程跟上文我们的理论部分都是一致的。如果我们使用私钥对app进行签名，并将cer文件一起发送到手机，手机就可以验证我们的身份，并验证我们app的完整性。</p>
+<p>另外显而易见的一点是，没有私钥的电脑是无法正常进行开发的。团队开发的时候，需要将最初的私钥分享给其他的小伙伴。</p>
+<p>除此之外，苹果添加了一些额外的控制：</p>
+<ol>
+<li>对能够进行开发的测试手机进行限制 </li>
+<li>对测试手机上能够运行的app进行限制 </li>
+<li>对app的功能进行限制</li>
+</ol>
+<p>为此，苹果专门设计了一个mobileprovision文件，将证书、AppID、设备ID列表、App权限组合到一起，并对组合数据进行签名，组合数据和签名构成mobileprovision文件。并用这个文件代替原来的cer文件发送给手机。</p>
+<p>手机接收到程序文件和mobileprovision文件后，首先用苹果的公钥（内置在手机系统中）验证provision文件，如果正常，那我们就得到证书、AppID、设备ID列表、app功能等一系列信息。然后我们用苹果的公钥验证证书文件，得到电脑的公钥。最后我们可以用电脑的公钥去验证APP的完整性。此外我们还可以验证AppID是否符合、当前设备是否在设备列表中、app功能有没有超出限制等等。任何一项验证失败的话，app就不能运行。</p>
+<p><img src="http://blog.cnbang.net/wp-content/uploads/2017/03/sign4.png" alt="流程图"></p>
+<h2 id="HTTPS加密机制"><a href="#HTTPS加密机制" class="headerlink" title="HTTPS加密机制"></a>HTTPS加密机制</h2><p>非对称加密虽然更加安全，但是需要耗费更多资源和时间，所以每次通信都使用非对称加密是不合算的。HTTPS的做法是，在握手阶段，通信双方使用非对称加密协商出一种对称加密算法及其密钥，在接下来的通信过程中，双方使用对称加密算法进行通信。</p>
+<p>握手过程共分为5步：</p>
+<ol>
+<li>客户端给出协议版本、第一个随机数和客户端支持的加密方法</li>
+<li>服务器确定一种加密方式，并给出数字证书和第二个随机数</li>
+<li>客户端确认证书有效，然后用证书中的公钥将第三个随机数加密，发送给服务器</li>
+<li>服务器用私钥将收到的数据解密，得到第三个随机数</li>
+<li>双方根据之前商定的加密方法，使用之前的三个随机数生成对话密钥，用来加密接下来的通信过程</li>
+</ol>
+<h2 id="类比分析"><a href="#类比分析" class="headerlink" title="类比分析"></a>类比分析</h2><ol>
+<li><p>最终的密钥（苹果公司和互联网认证机构的公钥）都不能靠网络传输，而是保存在系统中的。使用网络传输密钥，始终会陷入到鸡生蛋蛋生鸡的问题中去。</p>
+</li>
+<li><p>数字签名和数字证书，都是为了验证发送方的身份（有效内容都是发送方的公钥）</p>
+</li>
+</ol>
+<h2 id="其他用途：SSH公钥登录"><a href="#其他用途：SSH公钥登录" class="headerlink" title="其他用途：SSH公钥登录"></a>其他用途：SSH公钥登录</h2><p>相比于密码登录，密钥登录显然更加安全。有很多SSH服务都已经禁止了账户密码登录。</p>
+<p>用户先将自己的公钥上传到服务器，登录的时候，服务器向用户发送一串随机字符串，用户用自己的私钥加密以后，发送回服务器，服务器使用用户的公钥进行解密，如果解密成功，就证明用户可信，允许直接登录。</p>
+<h2 id="Refenrences"><a href="#Refenrences" class="headerlink" title="Refenrences"></a>Refenrences</h2><p>[1] <a href="http://www.ruanyifeng.com/blog/2013/06/rsa_algorithm_part_one.html" target="_blank" rel="external">RSA算法原理一</a></p>
+<p>[2] <a href="http://www.ruanyifeng.com/blog/2013/07/rsa_algorithm_part_two.html" target="_blank" rel="external">RSA算法原理二</a></p>
+<p>[3] <a href="http://www.ruanyifeng.com/blog/2011/08/what_is_a_digital_signature.html" target="_blank" rel="external">数字签名是什么</a></p>
+<p>[4] <a href="http://blog.cnbang.net/tech/3386/" target="_blank" rel="external">iOS APP签名的原理</a></p>
+<p>[5] <a href="http://www.pchou.info/ios/2015/12/14/ios-certification-and-code-sign.html" target="_blank" rel="external">漫谈iOS程序的证书和签名机制</a></p>
+
+  </section>
+
+  
+
+<section class="post-comments">
+  <div id="disqus_thread"></div>
+  <script type="text/javascript">
+      var disqus_shortname = 'hanyinggarden'; 
+      /* * * DON'T EDIT BELOW THIS LINE * * */
+      (function() {
+          var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+          dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+          (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+      })();
+  </script>
+  <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</section>
+
+
+  
+  
+  <span id="busuanzi_container_page_pv">本文阅读量: <span id="busuanzi_value_page_pv"></span></span>
+
+</article>
+
+
+            <footer class="footer">
+
+    <span class="footer__copyright">&copy; 2017. Zhang Hanying. | 由<a href="https://hexo.io/">Hexo</a>强力驱动 | 主题<a href="https://github.com/someus/huno">Huno</a></span>
+ 
+    <script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span id="busuanzi_container_site_uv">访客数: <span id="busuanzi_value_site_uv">    </span></span>   
+    <span id="busuanzi_container_site_pv">总访问量: <span id="busuanzi_value_site_pv"></span></span>
+</footer>
+
+        </div>
+    </div>
+
+    <!-- js files -->
+    <script src="/js/jquery.min.js"></script>
+    <script src="/js/main.js"></script>
+    <script src="/js/scale.fix.js"></script>
+    
+
+    
+
+    <script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript"> 
+        $(document).ready(function(){
+            MathJax.Hub.Config({ 
+                tex2jax: {inlineMath: [['[latex]','[/latex]'], ['\\(','\\)']]} 
+            });
+        });
+    </script>
+
+
+    
+
+    <script src="/js/awesome-toc.min.js"></script>
+    <script>
+        $(document).ready(function(){
+            $.awesome_toc({
+                overlay: true,
+                contentId: "post-content",
+            });
+        });
+    </script>
+
+
+    
+    
+    <!--kill ie6 -->
+<!--[if IE 6]>
+  <script src="//letskillie6.googlecode.com/svn/trunk/2/zh_CN.js"></script>
+<![endif]-->
+
+</body>
+</html>

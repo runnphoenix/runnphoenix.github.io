@@ -7,7 +7,7 @@
     
 
     <title>
-      软件设计的一些基本原则 | Hanying Garden 
+      如何配置SSH密钥 | Hanying Garden 
     </title>
 
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
@@ -16,17 +16,19 @@
     
     
 
-    <meta name="description" content="学习设计模式遇到的困难从进入到软件开发领域开始接触设计模式，到现在也有两年多的时间了。可悲的是，到现在自己都没有对设计模式建立起一套完整甚至是基本的理解。不用功是一方面，另一方面，的确在试图理解设计模式的时候出现了很多困难。 总结起来，出现这些困难无非是两个原因： - 软件开发实践不足，深度不够，没有必须要使用设计模式的环境 - 对软件开发的一些更基本的原则理解不够，没学好走路就想跑，肯定会摔跤">
-<meta name="keywords">
+    <meta name="description" content="SSH密钥的配置说明">
+<meta name="keywords" content="SSH">
 <meta property="og:type" content="article">
-<meta property="og:title" content="软件设计的一些基本原则 | Hanying Garden">
-<meta property="og:url" content="http://hanyinggarden.net/2016/07/14/软件设计的一些基本原则/index.html">
+<meta property="og:title" content="如何配置SSH密钥 | Hanying Garden">
+<meta property="og:url" content="http://hanyinggarden.net/2017/07/26/ssh-configuration/index.html">
 <meta property="og:site_name" content="Hanying Garden">
-<meta property="og:description" content="学习设计模式遇到的困难从进入到软件开发领域开始接触设计模式，到现在也有两年多的时间了。可悲的是，到现在自己都没有对设计模式建立起一套完整甚至是基本的理解。不用功是一方面，另一方面，的确在试图理解设计模式的时候出现了很多困难。 总结起来，出现这些困难无非是两个原因： - 软件开发实践不足，深度不够，没有必须要使用设计模式的环境 - 对软件开发的一些更基本的原则理解不够，没学好走路就想跑，肯定会摔跤">
-<meta property="og:updated_time" content="2017-04-25T12:01:26.000Z">
+<meta property="og:description" content="SSH密钥的配置说明">
+<meta property="og:image" content="http://hanyinggarden.net/2017/07/26/ssh-configuration/authorized_keys_example.jpg">
+<meta property="og:updated_time" content="2017-07-26T01:19:42.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="软件设计的一些基本原则 | Hanying Garden">
-<meta name="twitter:description" content="学习设计模式遇到的困难从进入到软件开发领域开始接触设计模式，到现在也有两年多的时间了。可悲的是，到现在自己都没有对设计模式建立起一套完整甚至是基本的理解。不用功是一方面，另一方面，的确在试图理解设计模式的时候出现了很多困难。 总结起来，出现这些困难无非是两个原因： - 软件开发实践不足，深度不够，没有必须要使用设计模式的环境 - 对软件开发的一些更基本的原则理解不够，没学好走路就想跑，肯定会摔跤">
+<meta name="twitter:title" content="如何配置SSH密钥 | Hanying Garden">
+<meta name="twitter:description" content="SSH密钥的配置说明">
+<meta name="twitter:image" content="http://hanyinggarden.net/2017/07/26/ssh-configuration/authorized_keys_example.jpg">
     
     
     
@@ -192,17 +194,27 @@ classes that you can use:
 
   <header class="post-header">
     
-    <h1 class="post-title">软件设计的一些基本原则</h1>
+    <h1 class="post-title">如何配置SSH密钥</h1>
 
     
 
     <div class="post-meta">
-      <time datetime="2016-07-14" class="post-meta__date date">2016-07-14</time> 
+      <time datetime="2017-07-26" class="post-meta__date date">2017-07-26</time> 
 
       <span class="post-meta__tags tags">
 
           
+            <font class="categories">
+            &#8226; 分类:
+            <a class="categories-link" href="/categories/SSH/">SSH</a>
+            </font>
+          
 
+          
+             &#8226; 标签:
+            <font class="tags">
+              <a class="tags-link" href="/tags/SSH/">SSH</a>
+            </font>
           
 
       </span>
@@ -213,30 +225,18 @@ classes that you can use:
   </header>
 
   <section id="post-content" class="article-content post">
-    <h2 id="学习设计模式遇到的困难"><a href="#学习设计模式遇到的困难" class="headerlink" title="学习设计模式遇到的困难"></a>学习设计模式遇到的困难</h2><p>从进入到软件开发领域开始接触设计模式，到现在也有两年多的时间了。可悲的是，到现在自己都没有对设计模式建立起一套完整甚至是基本的理解。不用功是一方面，另一方面，的确在试图理解设计模式的时候出现了很多困难。</p>
-<p>总结起来，出现这些困难无非是两个原因：</p>
-<pre><code>- 软件开发实践不足，深度不够，没有必须要使用设计模式的环境
-- 对软件开发的一些更基本的原则理解不够，没学好走路就想跑，肯定会摔跤
-</code></pre><p>第一个原因需要在实际工作中不断积累和总结。今天来针对第二个原因，总结一下软件开发的一些最基本的设计原则。</p>
-<h2 id="软件设计的基本原则"><a href="#软件设计的基本原则" class="headerlink" title="软件设计的基本原则"></a>软件设计的基本原则</h2><h3 id="S-O-L-I-D原则"><a href="#S-O-L-I-D原则" class="headerlink" title="- S.O.L.I.D原则"></a>- S.O.L.I.D原则</h3><p>S.O.L.I.D原则是五个基本原则，分别是：</p>
-<pre><code>- Single Responsibility Principle (SRP) 单一职责原则
-</code></pre><p>单一职责原则很好理解：一个类，只做一件事。最好的体现就是Linux／Unix系统，每个程序只负责一件单一的事，需要负责的功能时，可以通过管道进行组合。</p>
-<pre><code>- Open/Closed Principle (OCP) 开闭原则
-</code></pre><p>对扩展开放，对修改封闭。对修改封闭是坚持原则，对扩展开放是保持通融。浏览器的各种插件就是一个很好的例子。个人以为，装饰模式就是这个原则的体现。耗子叔的文章中提到策略模式属于这个原则的实现（而非装饰模式），我对于策略模式的理解还不到位，此处需要进一步深入理解，可能存在认知偏差。</p>
-<pre><code>- Leskov Substitution Principle (LSP) 李氏替换原则
-</code></pre><p>这个原则是说，代码中的子类应该能够替代父类，并且不会出现任何问题。<br>这个原则是使代码符合开闭原则的一个重要保证。<br>使得父类型的模块在无需修改的情况下就可以扩展。<br>例子：“正方形不是长方形”</p>
-<pre><code>- Interface Segregation Principle (ISP) 接口隔离原则
-</code></pre><p>使用多个专用接口，而不是使用一个大的总接口。</p>
-<pre><code>- Dependency Inversion Principle (DIP) 依赖倒置原则
-</code></pre><p>高层模块不应该依赖于低层模块的实现，而应该依赖于高层抽象。</p>
-<pre><code>- Don’t Repeat Yourself (DRY)
-
-- 高內聚，低耦合
-
-- 面向接口而非实现编程
-</code></pre><h2 id="多一句嘴，对设计模式的非议"><a href="#多一句嘴，对设计模式的非议" class="headerlink" title="多一句嘴，对设计模式的非议"></a>多一句嘴，对设计模式的非议</h2><p>很多大牛都提到过，设计模式并非面向对象编程独有。实际上早在面向对象编程出现之前，各种设计模式就被广泛使用了，只不过当时没有被总结出来。</p>
-<p>防止设计模式的过度使用，因为想要使用设计模式而使用设计模式，反而会造成代码的可读性和可维护性更差。</p>
-<p>Peter Norvig 在98年就指出，在“动态语言”中，设计模式绝大部分都“透明”了。</p>
+    <p>为了提高SSH连接的安全性，除了更改默认的22端口外，应尽量使用密钥代替口令登录。<br><a id="more"></a></p>
+<p>##原理<br>使用密钥登录时，服务端将一段随机的字符串发送给客户端，客户端使用私钥加密之后，发送回服务端，服务端使用客户端的公钥（事先保存在服务端）进行解密，如果解密成功，说明客户端可信，允许其登录，否则拒绝。</p>
+<p>##配置<br>无论作为服务端还是作为客户端，都有两个相关的配置文件，都分别在用户个人目录和<code>/etc/ssh/</code>目录下。</p>
+<p>###作为服务端</p>
+<p>####<code>/etc/ssh/sshd_configuration</code><br>这个文件是ssh服务的配置文件。</p>
+<p>其中跟密码密钥配置相关的:</p>
+<p>PermitRootLogin         prohibit-password    //是否允许root登录<br>PubkeyAuthentication    yes                  //是否允许密钥登录<br>AuthorizedKeysFile        .ssh/authorized_keys //允许连接的客户端密钥的集合文件<br>PasswordAuthentication  yes                  //是否允许密码登录<br>PermitEmptyPasswords    no                   //是否允许空密码</p>
+<p>####<code>~/.ssh/authorized_keys</code><br>这个文件是允许连接的客户端的公钥的集合。客户端的公钥没有发送到这里的话是不允许连接的。<br><img src="./authorized_keys_example.jpg" alt="Example"></p>
+<p>###作为客户端<br>两个配置文件分别是<code>/etc/ssh/ssh_config</code>和<code>~/.ssh/ssh_config</code>，前者面向所有用户，后者针对相应的单个用户，两个文件的写法是一样的。格式如下:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">Host alias1</div><div class="line">	HostName     123.123.123.123</div><div class="line">	Port         22</div><div class="line">	User         user_name</div><div class="line">	IdentifyFile ~/.ssh/123</div><div class="line"></div><div class="line">Host alias2</div><div class="line">	HostName     110.119.120.0</div><div class="line">	Port         2345</div><div class="line">	User         dsb</div><div class="line">	Identifyfile ~/.ssh/dsb</div></pre></td></tr></table></figure>
+<p>配置完成以后，输入命令<code>ssh alias1</code>即可登录alias1服务端。</p>
+<p>同样，如果想要传送文件到alias2服务端，只需输入命令<code>scp i_am_dsb.txt alias2:~/received_files/</code>(轻松又惬意，对比一下<code>scp i_am_dsb.txt -P 2345 -i ~/.ssh/dsb 110.119.120.0:~/recieved_files/</code>，另外这个大写的P简直是神坑)。</p>
 
   </section>
 
