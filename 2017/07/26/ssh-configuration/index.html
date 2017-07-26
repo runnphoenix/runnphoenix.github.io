@@ -24,7 +24,7 @@
 <meta property="og:site_name" content="Hanying Garden">
 <meta property="og:description" content="SSH密钥的配置说明">
 <meta property="og:image" content="http://hanyinggarden.net/2017/07/26/ssh-configuration/authorized_keys_example.jpg">
-<meta property="og:updated_time" content="2017-07-26T01:19:42.000Z">
+<meta property="og:updated_time" content="2017-07-26T01:41:38.518Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="如何配置SSH密钥 | Hanying Garden">
 <meta name="twitter:description" content="SSH密钥的配置说明">
@@ -226,14 +226,13 @@ classes that you can use:
 
   <section id="post-content" class="article-content post">
     <p>为了提高SSH连接的安全性，除了更改默认的22端口外，应尽量使用密钥代替口令登录。<br><a id="more"></a></p>
-<p>##原理<br>使用密钥登录时，服务端将一段随机的字符串发送给客户端，客户端使用私钥加密之后，发送回服务端，服务端使用客户端的公钥（事先保存在服务端）进行解密，如果解密成功，说明客户端可信，允许其登录，否则拒绝。</p>
-<p>##配置<br>无论作为服务端还是作为客户端，都有两个相关的配置文件，都分别在用户个人目录和<code>/etc/ssh/</code>目录下。</p>
-<p>###作为服务端</p>
-<p>####<code>/etc/ssh/sshd_configuration</code><br>这个文件是ssh服务的配置文件。</p>
+<h2 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h2><p>使用密钥登录时，服务端将一段随机的字符串发送给客户端，客户端使用私钥加密之后，发送回服务端，服务端使用客户端的公钥（事先保存在服务端）进行解密，如果解密成功，说明客户端可信，允许其登录，否则拒绝。</p>
+<h2 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h2><p>无论作为服务端还是作为客户端，都有两个相关的配置文件，都分别在用户个人目录和<code>/etc/ssh/</code>目录下。</p>
+<h3 id="作为服务端"><a href="#作为服务端" class="headerlink" title="作为服务端"></a>作为服务端</h3><h4 id="etc-ssh-sshd-configuration"><a href="#etc-ssh-sshd-configuration" class="headerlink" title="/etc/ssh/sshd_configuration"></a><code>/etc/ssh/sshd_configuration</code></h4><p>这个文件是ssh服务的配置文件。</p>
 <p>其中跟密码密钥配置相关的:</p>
 <p>PermitRootLogin         prohibit-password    //是否允许root登录<br>PubkeyAuthentication    yes                  //是否允许密钥登录<br>AuthorizedKeysFile        .ssh/authorized_keys //允许连接的客户端密钥的集合文件<br>PasswordAuthentication  yes                  //是否允许密码登录<br>PermitEmptyPasswords    no                   //是否允许空密码</p>
-<p>####<code>~/.ssh/authorized_keys</code><br>这个文件是允许连接的客户端的公钥的集合。客户端的公钥没有发送到这里的话是不允许连接的。<br><img src="./authorized_keys_example.jpg" alt="Example"></p>
-<p>###作为客户端<br>两个配置文件分别是<code>/etc/ssh/ssh_config</code>和<code>~/.ssh/ssh_config</code>，前者面向所有用户，后者针对相应的单个用户，两个文件的写法是一样的。格式如下:</p>
+<h4 id="ssh-authorized-keys"><a href="#ssh-authorized-keys" class="headerlink" title="~/.ssh/authorized_keys"></a><code>~/.ssh/authorized_keys</code></h4><p>这个文件是允许连接的客户端的公钥的集合。客户端的公钥没有发送到这里的话是不允许连接的。<br><img src="./authorized_keys_example.jpg" alt="Example"></p>
+<h3 id="作为客户端"><a href="#作为客户端" class="headerlink" title="作为客户端"></a>作为客户端</h3><p>两个配置文件分别是<code>/etc/ssh/ssh_config</code>和<code>~/.ssh/ssh_config</code>，前者面向所有用户，后者针对相应的单个用户，两个文件的写法是一样的。格式如下:</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">Host alias1</div><div class="line">	HostName     123.123.123.123</div><div class="line">	Port         22</div><div class="line">	User         user_name</div><div class="line">	IdentifyFile ~/.ssh/123</div><div class="line"></div><div class="line">Host alias2</div><div class="line">	HostName     110.119.120.0</div><div class="line">	Port         2345</div><div class="line">	User         dsb</div><div class="line">	Identifyfile ~/.ssh/dsb</div></pre></td></tr></table></figure>
 <p>配置完成以后，输入命令<code>ssh alias1</code>即可登录alias1服务端。</p>
 <p>同样，如果想要传送文件到alias2服务端，只需输入命令<code>scp i_am_dsb.txt alias2:~/received_files/</code>(轻松又惬意，对比一下<code>scp i_am_dsb.txt -P 2345 -i ~/.ssh/dsb 110.119.120.0:~/recieved_files/</code>，另外这个大写的P简直是神坑)。</p>
