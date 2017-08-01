@@ -23,7 +23,7 @@
 <meta property="og:url" content="http://hanyinggarden.net/2017/07/28/faster-rcnn-imagenet/index.html">
 <meta property="og:site_name" content="Hanying Garden">
 <meta property="og:description" content="用自定义的imagenet数据集训练Faster R-CNN网络">
-<meta property="og:updated_time" content="2017-07-28T02:40:28.910Z">
+<meta property="og:updated_time" content="2017-08-01T01:53:56.067Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="用自定义的imagenet数据集训练Faster R-CNN网络 | Hanying Garden">
 <meta name="twitter:description" content="用自定义的imagenet数据集训练Faster R-CNN网络">
@@ -225,7 +225,40 @@ classes that you can use:
   <section id="post-content" class="article-content post">
     <a id="more"></a>
 <h2 id="Intro"><a href="#Intro" class="headerlink" title="Intro"></a>Intro</h2><p>人工智能和机器学习在最近几年出现井喷式发展，私以为机器学习非常有可能成为将来程序员的必备技能，这是时代对我们提出的新要求。而吴恩达教授在coursera上教授的Machine Learning课程，可以说是入门机器学习的最佳选择。我在2016年完成了此门课程的学习，但在后续课程的学习过程中，发现自己对这门课程的掌握并不牢固。本文将对自己的学习过程和所得进行简单的总结，希望借此可以对课程有一个更好的把握。</p>
-<h2 id="Faster-R-CNN发展轨迹"><a href="#Faster-R-CNN发展轨迹" class="headerlink" title="Faster R-CNN发展轨迹"></a>Faster R-CNN发展轨迹</h2><h2 id="数据准备"><a href="#数据准备" class="headerlink" title="数据准备"></a>数据准备</h2><h2 id="参数调整"><a href="#参数调整" class="headerlink" title="参数调整"></a>参数调整</h2><h2 id="错误处理"><a href="#错误处理" class="headerlink" title="错误处理"></a>错误处理</h2><h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2>
+<h2 id="Faster-R-CNN发展轨迹"><a href="#Faster-R-CNN发展轨迹" class="headerlink" title="Faster R-CNN发展轨迹"></a>Faster R-CNN发展轨迹</h2><p><code>R-CNN</code>  –&gt; <code>Fast R-CNN</code>  –&gt; <code>Faster R-CNN</code>–&gt; <code>Mask R-CNN</code></p>
+<h2 id="数据准备"><a href="#数据准备" class="headerlink" title="数据准备"></a>数据准备</h2><h3 id="数据部分的目录结构"><a href="#数据部分的目录结构" class="headerlink" title="数据部分的目录结构"></a>数据部分的目录结构</h3><ul>
+<li>annotations_train<ul>
+<li>nxxxxxxxx_xxx.xml  ……</li>
+</ul>
+</li>
+<li>data<ul>
+<li>meta_det.mat</li>
+<li>det_lists <ul>
+<li>train.txt</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>images_train<ul>
+<li>tar_files</li>
+<li>with_bbox<ul>
+<li>nxxxxxxxx_xxx.JPEG …..</li>
+</ul>
+</li>
+<li>without_bbox<ul>
+<li>nxxxxxxxx_xxx.JPEG …..</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="数据来源"><a href="#数据来源" class="headerlink" title="数据来源"></a>数据来源</h3><h4 id="images"><a href="#images" class="headerlink" title="images"></a>images</h4><p>下载ILSVRC2012的的<a href="http://www.image-net.org/challenges/LSVRC/2012/nonpub-downloads" target="_blank" rel="external">数据集</a> 中<a href="http://www.image-net.org/challenges/LSVRC/2012/nnoupb/ILSVRC2012_img_train.tar" target="_blank" rel="external">任务1&amp;2的训练图片</a>（138GB)，将其中与食品有关的压缩包提取出来。</p>
+<p>将提取出来的压缩包中包含的图片解压到一个统一的目录下。</p>
+<h4 id="bounding-boxes"><a href="#bounding-boxes" class="headerlink" title="bounding boxes"></a>bounding boxes</h4><p>下载<a href="http://www.image-net.org/challenges/LSVRC/2012/nnoupb/ILSVRC2012_bbox_train_v2.tar.gz" target="_blank" rel="external">任务1&amp;2的bbox数据</a>，同样将其解压到同一个目录下。</p>
+<p>由于并不是所有的图片都有相对应的bbox数据，写了一个shell脚本将图片分成了with_bbox和without_bbox两部分，后续只使用包含了bbox的图片。</p>
+<h4 id="dat-file-amp-amp-list-file"><a href="#dat-file-amp-amp-list-file" class="headerlink" title="dat file &amp;&amp; list file"></a>dat file &amp;&amp; list file</h4><p>下载<a href="http://www.image-net.org/challenges/LSVRC/2012/nnoupb/ILSVRC2012_devkit_t12.tar.gz" target="_blank" rel="external">任务1&amp;2的Development kit</a>，将其中的mat文件复制到到我们的data目录下，改名为meta_det.mat。</p>
+<p>接下来我们需要所有训练数据的一个列表文件，即/DATA_DIR/data/det_lists/train.txt。写一个shell脚本即可实现，注意列表不包含后缀名。</p>
+<h2 id="参数调整"><a href="#参数调整" class="headerlink" title="参数调整"></a>参数调整</h2><h3 id="数据导入部分"><a href="#数据导入部分" class="headerlink" title="数据导入部分"></a>数据导入部分</h3><h3 id="网络结构部分"><a href="#网络结构部分" class="headerlink" title="网络结构部分"></a>网络结构部分</h3><h2 id="错误处理"><a href="#错误处理" class="headerlink" title="错误处理"></a>错误处理</h2><h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2>
   </section>
 
   
