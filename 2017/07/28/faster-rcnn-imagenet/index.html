@@ -23,7 +23,7 @@
 <meta property="og:url" content="http://hanyinggarden.net/2017/07/28/faster-rcnn-imagenet/index.html">
 <meta property="og:site_name" content="Hanying Garden">
 <meta property="og:description" content="用自定义的imagenet数据集训练Faster R-CNN网络">
-<meta property="og:updated_time" content="2017-08-01T01:53:56.067Z">
+<meta property="og:updated_time" content="2017-08-01T02:40:34.534Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="用自定义的imagenet数据集训练Faster R-CNN网络 | Hanying Garden">
 <meta name="twitter:description" content="用自定义的imagenet数据集训练Faster R-CNN网络">
@@ -258,7 +258,10 @@ classes that you can use:
 <p>由于并不是所有的图片都有相对应的bbox数据，写了一个shell脚本将图片分成了with_bbox和without_bbox两部分，后续只使用包含了bbox的图片。</p>
 <h4 id="dat-file-amp-amp-list-file"><a href="#dat-file-amp-amp-list-file" class="headerlink" title="dat file &amp;&amp; list file"></a>dat file &amp;&amp; list file</h4><p>下载<a href="http://www.image-net.org/challenges/LSVRC/2012/nnoupb/ILSVRC2012_devkit_t12.tar.gz" target="_blank" rel="external">任务1&amp;2的Development kit</a>，将其中的mat文件复制到到我们的data目录下，改名为meta_det.mat。</p>
 <p>接下来我们需要所有训练数据的一个列表文件，即/DATA_DIR/data/det_lists/train.txt。写一个shell脚本即可实现，注意列表不包含后缀名。</p>
-<h2 id="参数调整"><a href="#参数调整" class="headerlink" title="参数调整"></a>参数调整</h2><h3 id="数据导入部分"><a href="#数据导入部分" class="headerlink" title="数据导入部分"></a>数据导入部分</h3><h3 id="网络结构部分"><a href="#网络结构部分" class="headerlink" title="网络结构部分"></a>网络结构部分</h3><h2 id="错误处理"><a href="#错误处理" class="headerlink" title="错误处理"></a>错误处理</h2><h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2>
+<h2 id="参数调整"><a href="#参数调整" class="headerlink" title="参数调整"></a>参数调整</h2><p>以上是准备训练数据，我们还需要针对数据对源代码进行一定的修改。</p>
+<h3 id="源代码各文件夹作用"><a href="#源代码各文件夹作用" class="headerlink" title="源代码各文件夹作用"></a>源代码各文件夹作用</h3><h3 id="数据导入部分"><a href="#数据导入部分" class="headerlink" title="数据导入部分"></a>数据导入部分</h3><p>主要在/py-faser-rcnn/lib/datasets目录下进行修改。</p>
+<h3 id="网络结构部分"><a href="#网络结构部分" class="headerlink" title="网络结构部分"></a>网络结构部分</h3><p>主要修改/py-faster-rcnn/models目录下的文件。</p>
+<h2 id="错误处理"><a href="#错误处理" class="headerlink" title="错误处理"></a>错误处理</h2><h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2>
   </section>
 
   
