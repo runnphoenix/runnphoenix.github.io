@@ -25,7 +25,7 @@
 <meta property="og:description" content="机器学习课程的总结 - 线性回归和逻辑回归">
 <meta property="og:image" content="http://hanyinggarden.net/2017/08/02/ML-review-1/sigmoid.jpg">
 <meta property="og:image" content="http://hanyinggarden.net/2017/08/02/ML-review-1/logistic_loss_func.jpg">
-<meta property="og:updated_time" content="2017-08-02T05:53:06.452Z">
+<meta property="og:updated_time" content="2017-08-02T05:54:50.019Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Coursera 机器学习课程总结（一）线性回归和逻辑回归 | Hanying Garden">
 <meta name="twitter:description" content="机器学习课程的总结 - 线性回归和逻辑回归">
@@ -232,7 +232,7 @@ classes that you can use:
 
 <h3 id="监督学习-VS-非监督学习"><a href="#监督学习-VS-非监督学习" class="headerlink" title="监督学习 VS. 非监督学习"></a>监督学习 VS. 非监督学习</h3><p>监督学习和非监督学习的区分原则很直观: 给定训练数据的同时，是否也给了”正确结果”。举例来说，对于一个图像分类问题，在给定图像的同时，还会给出图像属于那个分类的说明，这就属于监督学习；而对于聚类算法，只是给出一堆数据，要求把数据按照相似性分成几个部分，这就是非监督学习。</p>
 <p><code>强化学习</code>通常被看成是与监督学习和非监督学习并列的一种学习方式。</p>
-<h4 id="理论重点"><a href="#理论重点" class="headerlink" title="理论重点"></a>理论重点</h4><p>回归问题部分，介绍了<code>损失函数</code>、<code>梯度递减</code>的概念，是整个机器学习中最重要的基础。</p>
+<h3 id="理论重点"><a href="#理论重点" class="headerlink" title="理论重点"></a>理论重点</h3><p>回归问题部分，介绍了<code>损失函数</code>、<code>梯度递减</code>的概念，是整个机器学习中最重要的基础。</p>
 <p>损失函数又叫目标函数，可以看作我们的模型预测值与实际值之间差距的大小，损失函数值越小，说明我们的模型越正确。所以，解决一个机器学习问题的总体思路就是:先得到损失函数，然后调整参数，以保证目标函数值能达到最小。</p>
 <p>梯度递减就是寻找损失函数最小值的一种方法。其过程类似于我们从山上一步一步走到山谷。数学上来说，就是各个方向的偏导数同步减小的过程。其中，步长和步数是可以调整的参数。但是，步长要合适，长度太长的话，会容易”跑到对面山上去”，整个地图乱跑。太小的话，在一定的步数之內，可能尚未到达最小点。到达最小点之后，将会在附近徘徊。</p>
 <p>这种递减方式叫做<code>批量梯度递减</code>，因為每次递减都需要所有的训练数据参与，当数据量很大的时候，速度会比較慢。</p>
@@ -248,7 +248,7 @@ classes that you can use:
 <p>$$ f(x) = \begin{cases}<br>-log(h<em>θ(x))\\<br>-log(1-h</em>θ(x))<br>\end{cases} $$</p>
 <p><img src="./logistic_loss_func.jpg" alt="logistic"></p>
 <p>sigmoid函数将模型的值域固定在0到1之间，在损失函数中，该值域变成了作用域。从上图可以看出，当y=1时，$h_θ(x)$接近1时，损失函数几乎为0，反之，当其接近0时，惩罚将会非常快速地增长。y=0时也是一样的道理。</p>
-<h4 id="作业"><a href="#作业" class="headerlink" title="作业"></a>作业</h4>
+<h3 id="作业"><a href="#作业" class="headerlink" title="作业"></a>作业</h3>
   </section>
 
   
