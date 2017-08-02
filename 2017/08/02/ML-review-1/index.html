@@ -7,7 +7,7 @@
     
 
     <title>
-      Coursera 机器学习课程总结 | Hanying Garden 
+      Coursera 机器学习课程总结 - 篇一 线性回归和逻辑回归 | Hanying Garden 
     </title>
 
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
@@ -19,17 +19,17 @@
     <meta name="description" content="对Coursera上的机器学习课程的总结">
 <meta name="keywords" content="ML">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Coursera 机器学习课程总结 | Hanying Garden">
-<meta property="og:url" content="http://hanyinggarden.net/2017/07/27/ML-review-1/index.html">
+<meta property="og:title" content="Coursera 机器学习课程总结 - 篇一 线性回归和逻辑回归 | Hanying Garden">
+<meta property="og:url" content="http://hanyinggarden.net/2017/08/02/ML-review-1/index.html">
 <meta property="og:site_name" content="Hanying Garden">
 <meta property="og:description" content="对Coursera上的机器学习课程的总结">
-<meta property="og:image" content="http://hanyinggarden.net/2017/07/27/ML-review-1/sigmoid.jpg">
-<meta property="og:image" content="http://hanyinggarden.net/2017/07/27/ML-review-1/logistic_loss_func.jpg">
-<meta property="og:updated_time" content="2017-08-02T03:16:11.000Z">
+<meta property="og:image" content="http://hanyinggarden.net/2017/08/02/ML-review-1/sigmoid.jpg">
+<meta property="og:image" content="http://hanyinggarden.net/2017/08/02/ML-review-1/logistic_loss_func.jpg">
+<meta property="og:updated_time" content="2017-08-02T05:49:24.387Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Coursera 机器学习课程总结 | Hanying Garden">
+<meta name="twitter:title" content="Coursera 机器学习课程总结 - 篇一 线性回归和逻辑回归 | Hanying Garden">
 <meta name="twitter:description" content="对Coursera上的机器学习课程的总结">
-<meta name="twitter:image" content="http://hanyinggarden.net/2017/07/27/ML-review-1/sigmoid.jpg">
+<meta name="twitter:image" content="http://hanyinggarden.net/2017/08/02/ML-review-1/sigmoid.jpg">
     
     
     
@@ -195,12 +195,12 @@ classes that you can use:
 
   <header class="post-header">
     
-    <h1 class="post-title">Coursera 机器学习课程总结</h1>
+    <h1 class="post-title">Coursera 机器学习课程总结 - 篇一 线性回归和逻辑回归</h1>
 
     
 
     <div class="post-meta">
-      <time datetime="2017-07-27" class="post-meta__date date">2017-07-27</time> 
+      <time datetime="2017-08-02" class="post-meta__date date">2017-08-02</time> 
 
       <span class="post-meta__tags tags">
 
@@ -245,7 +245,7 @@ classes that you can use:
 <p>整合输入之后模型变成：</p>
 <p>$$ h_θ(x) = \frac{1}{1+e^{-θ^Tx}} $$</p>
 <p>损失函数：</p>
-<p>$$ f(x) = \begin{cases}<br>-log(h<em>θ(x))\\<br>-log(1-h</em>θ(x))<br>\end{cases} $$</p>
+<p>$$ f(x) = \begin{cases}<br>-log(h<em>θ(x))\<br>-log(1-h</em>θ(x))<br>\end{cases} $$</p>
 <p><img src="./logistic_loss_func.jpg" alt="logistic"></p>
 <p>sigmoid函数将模型的值域固定在0到1之间，在损失函数中，该值域变成了作用域。从上图可以看出，当y=1时，$h_θ(x)$接近1时，损失函数几乎为0，反之，当其接近0时，惩罚将会非常快速地增长。y=0时也是一样的道理。</p>
 <h4 id="作业"><a href="#作业" class="headerlink" title="作业"></a>作业</h4>
