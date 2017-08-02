@@ -7,7 +7,7 @@
     
 
     <title>
-      学习总结系列 | Hanying Garden 
+      Coursera 机器学习课程总结 | Hanying Garden 
     </title>
 
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
@@ -16,17 +16,20 @@
     
     
 
-    <meta name="description" content="总结最近两三年学习的课程">
-<meta name="keywords" content="Review">
+    <meta name="description" content="对Coursera上的机器学习课程的总结">
+<meta name="keywords" content="ML">
 <meta property="og:type" content="article">
-<meta property="og:title" content="学习总结系列 | Hanying Garden">
-<meta property="og:url" content="http://hanyinggarden.net/2017/07/25/review-series-posts/index.html">
+<meta property="og:title" content="Coursera 机器学习课程总结 | Hanying Garden">
+<meta property="og:url" content="http://hanyinggarden.net/2017/07/27/ML-review-1/index.html">
 <meta property="og:site_name" content="Hanying Garden">
-<meta property="og:description" content="总结最近两三年学习的课程">
-<meta property="og:updated_time" content="2017-07-29T01:34:51.327Z">
+<meta property="og:description" content="对Coursera上的机器学习课程的总结">
+<meta property="og:image" content="http://hanyinggarden.net/2017/07/27/ML-review-1/sigmoid.jpg">
+<meta property="og:image" content="http://hanyinggarden.net/2017/07/27/ML-review-1/logistic_loss_func.jpg">
+<meta property="og:updated_time" content="2017-08-02T03:16:11.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="学习总结系列 | Hanying Garden">
-<meta name="twitter:description" content="总结最近两三年学习的课程">
+<meta name="twitter:title" content="Coursera 机器学习课程总结 | Hanying Garden">
+<meta name="twitter:description" content="对Coursera上的机器学习课程的总结">
+<meta name="twitter:image" content="http://hanyinggarden.net/2017/07/27/ML-review-1/sigmoid.jpg">
     
     
     
@@ -192,26 +195,26 @@ classes that you can use:
 
   <header class="post-header">
     
-    <h1 class="post-title">学习总结系列</h1>
+    <h1 class="post-title">Coursera 机器学习课程总结</h1>
 
     
 
     <div class="post-meta">
-      <time datetime="2017-07-25" class="post-meta__date date">2017-07-25</time> 
+      <time datetime="2017-07-27" class="post-meta__date date">2017-07-27</time> 
 
       <span class="post-meta__tags tags">
 
           
             <font class="categories">
             &#8226; 分类:
-            <a class="categories-link" href="/categories/Review/">Review</a>
+            <a class="categories-link" href="/categories/ML/">ML</a>
             </font>
           
 
           
              &#8226; 标签:
             <font class="tags">
-              <a class="tags-link" href="/tags/Review/">Review</a>
+              <a class="tags-link" href="/tags/ML/">ML</a>
             </font>
           
 
@@ -224,16 +227,28 @@ classes that you can use:
 
   <section id="post-content" class="article-content post">
     <a id="more"></a>
-<p>最近几年参加了网络上很多课程的学习，要么是为了弥补欠缺的计算机理论知识，要么是为了能够跟上技术最新的发展。然而，回过头来看，却往往是黑瞎子掰棒子，前面的都给丢光了。</p>
-<p>所以，计划写一写这些课程的学习总结，把掉了的棒子都捡起来。</p>
-<h2 id="待总结课程"><a href="#待总结课程" class="headerlink" title="待总结课程"></a>待总结课程</h2><ul>
-<li>Software Security，Coursera</li>
-<li>Algorithms, Coursera</li>
-<li>Machine Learning, Coursera</li>
-<li>FSND, Udacity</li>
-<li>Deep Learning, Udacity</li>
-</ul>
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
 
+<h3 id="监督学习-VS-非监督学习"><a href="#监督学习-VS-非监督学习" class="headerlink" title="监督学习 VS. 非监督学习"></a>监督学习 VS. 非监督学习</h3><p>监督学习和非监督学习的区分原则很直观: 给定训练数据的同时，是否也给了”正确结果”。举例来说，对于一个图像分类问题，在给定图像的同时，还会给出图像属于那个分类的说明，这就属于监督学习；而对于聚类算法，只是给出一堆数据，要求把数据按照相似性分成几个部分，这就是非监督学习。</p>
+<p><code>强化学习</code>通常被看成是与监督学习和非监督学习并列的一种学习方式。</p>
+<h4 id="理论重点"><a href="#理论重点" class="headerlink" title="理论重点"></a>理论重点</h4><p>回归问题部分，介绍了<code>损失函数</code>、<code>梯度递减</code>的概念，是整个机器学习中最重要的基础。</p>
+<p>损失函数又叫目标函数，可以看作我们的模型预测值与实际值之间差距的大小，损失函数值越小，说明我们的模型越正确。所以，解决一个机器学习问题的总体思路就是:先得到损失函数，然后调整参数，以保证目标函数值能达到最小。</p>
+<p>梯度递减就是寻找损失函数最小值的一种方法。其过程类似于我们从山上一步一步走到山谷。数学上来说，就是各个方向的偏导数同步减小的过程。其中，步长和步数是可以调整的参数。但是，步长要合适，长度太长的话，会容易”跑到对面山上去”，整个地图乱跑。太小的话，在一定的步数之內，可能尚未到达最小点。到达最小点之后，将会在附近徘徊。</p>
+<p>这种递减方式叫做<code>批量梯度递减</code>，因為每次递减都需要所有的训练数据参与，当数据量很大的时候，速度会比較慢。</p>
+<p>梯度递减的初始值是隨机的。</p>
+<p>另外，最后到达的，不一定是最小值，可能只是极小值。</p>
+<p>参数要统一賦值，如果有三个参数要更新，必須要等到三个参数的新值都计算好以后，再一起賦值。</p>
+<p><code>归一化</code>：如果两种特征的值域相差很大，需要将其统一到［-1,1]的范围內。</p>
+<p>逻辑回归本貭上是个分类问題，引入了<code>sigmoid函數</code>：<br><img src="./sigmoid.jpg" alt="sigmoid"></p>
+<p>$$ g(z) = \frac{1}{1+e^{-z}} $$</p>
+<p>整合输入之后模型变成：</p>
+<p>$$ h_θ(x) = \frac{1}{1+e^{-θ^Tx}} $$</p>
+<p>损失函数：</p>
+<p>$$ f(x) = \begin{cases}<br>-log(h<em>θ(x))\\<br>-log(1-h</em>θ(x))<br>\end{cases} $$</p>
+<p><img src="./logistic_loss_func.jpg" alt="logistic"></p>
+<p>sigmoid函数将模型的值域固定在0到1之间，在损失函数中，该值域变成了作用域。从上图可以看出，当y=1时，$h_θ(x)$接近1时，损失函数几乎为0，反之，当其接近0时，惩罚将会非常快速地增长。y=0时也是一样的道理。</p>
+<h4 id="作业"><a href="#作业" class="headerlink" title="作业"></a>作业</h4>
   </section>
 
   
