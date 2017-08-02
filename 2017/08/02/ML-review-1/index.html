@@ -25,7 +25,7 @@
 <meta property="og:description" content="机器学习课程的总结 - 线性回归和逻辑回归">
 <meta property="og:image" content="http://hanyinggarden.net/2017/08/02/ML-review-1/sigmoid.jpg">
 <meta property="og:image" content="http://hanyinggarden.net/2017/08/02/ML-review-1/logistic_loss_func.jpg">
-<meta property="og:updated_time" content="2017-08-02T05:51:41.001Z">
+<meta property="og:updated_time" content="2017-08-02T05:53:06.452Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Coursera 机器学习课程总结（一）线性回归和逻辑回归 | Hanying Garden">
 <meta name="twitter:description" content="机器学习课程的总结 - 线性回归和逻辑回归">
@@ -245,7 +245,7 @@ classes that you can use:
 <p>整合输入之后模型变成：</p>
 <p>$$ h_θ(x) = \frac{1}{1+e^{-θ^Tx}} $$</p>
 <p>损失函数：</p>
-<p>$$ f(x) = \begin{cases}<br>-log(h<em>θ(x))\<br>-log(1-h</em>θ(x))<br>\end{cases} $$</p>
+<p>$$ f(x) = \begin{cases}<br>-log(h<em>θ(x))\\<br>-log(1-h</em>θ(x))<br>\end{cases} $$</p>
 <p><img src="./logistic_loss_func.jpg" alt="logistic"></p>
 <p>sigmoid函数将模型的值域固定在0到1之间，在损失函数中，该值域变成了作用域。从上图可以看出，当y=1时，$h_θ(x)$接近1时，损失函数几乎为0，反之，当其接近0时，惩罚将会非常快速地增长。y=0时也是一样的道理。</p>
 <h4 id="作业"><a href="#作业" class="headerlink" title="作业"></a>作业</h4>
