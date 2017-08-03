@@ -26,7 +26,7 @@
 <meta property="og:image" content="http://hanyinggarden.net/2017/08/02/ML-review-1/sigmoid.jpg">
 <meta property="og:image" content="http://hanyinggarden.net/2017/08/02/ML-review-1/logistic_loss_func_total.png">
 <meta property="og:image" content="http://hanyinggarden.net/2017/08/02/ML-review-1/logistic_loss_func.jpg">
-<meta property="og:updated_time" content="2017-08-03T02:02:34.988Z">
+<meta property="og:updated_time" content="2017-08-03T02:08:33.958Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Coursera 机器学习课程总结1 - 线性回归和逻辑回归 | Hanying Garden">
 <meta name="twitter:description" content="机器学习课程的总结 - 线性回归和逻辑回归">
@@ -238,8 +238,10 @@ classes that you can use:
 <p>线性回归的损失函数是<br>$$J(\theta) = \frac{1}{2m}\sum<em>{i=1}^m(h</em>\theta(x^{(i)})-y^{(i)})^2$$</p>
 <p>其中，h(x)是我们的假设函数模型<br>$$h_\theta(x) = \theta_0 + \theta_1x_1 + \theta_2x_2 + \cdots + \theta_nx_n$$</p>
 <p>梯度递减就是寻找损失函数最小值的一种方法。其过程类似于我们从山上一步一步走到山谷。数学上来说，就是各个方向的偏导数同步减小的过程。其中，步长和步数是可以调整的参数。步长大小要合适，长度太长的话，会容易”跑到对面山上去”，整个地图乱跑；太小的话，在一定的步数之內，可能尚未到达最小点。到达最小点之后，将会在附近徘徊。</p>
-<p>偏导很容易计算:<br>$$ \frac{\partial{J(\theta)}}{\partial{\theta<em>0}} = \frac{1}{m}\sum</em>{i=1}^m(h_\theta)(x^{(i)}-y^{(i)})$$<br>$$ \frac{\partial{J(\theta)}}{\partial{\theta<em>j}} = \frac{1}{m}\sum</em>{i=1}^m(h_\theta)(x^{(i)}-y^{(i)})x_j^{(i)}$$</p>
-<p>因此<br>$$\theta_0 = \theta<em>0 - \alpha\frac{1}{m}\sum</em>{i=1}^m(h_\theta)(x^{(i)}-y^{(i)})$$<br>$$\theta_j = \theta<em>j - \alpha\frac{1}{m}\sum</em>{i=1}^m(h_\theta)(x^{(i)}-y^{(i)})x_j^{(i)}$$</p>
+<p>偏导很容易计算:<br>$$ \frac{\partial{J(\theta)}}{\partial{\theta<em>0}} = \frac{1}{m}\sum</em>{i=1}^m(h_\theta)(x^{(i)}-y^{(i)})$$</p>
+<p>$$ \frac{\partial{J(\theta)}}{\partial{\theta<em>j}} = \frac{1}{m}\sum</em>{i=1}^m(h_\theta)(x^{(i)}-y^{(i)})x_j^{(i)}$$</p>
+<p>因此<br>$$\theta_0 = \theta<em>0 - \alpha\frac{1}{m}\sum</em>{i=1}^m(h_\theta)(x^{(i)}-y^{(i)})$$</p>
+<p>$$\theta_j = \theta<em>j - \alpha\frac{1}{m}\sum</em>{i=1}^m(h_\theta)(x^{(i)}-y^{(i)})x_j^{(i)}$$</p>
 <p>这种递减方式叫做<code>批量梯度递减</code>，因為每次递减都需要所有的训练数据参与，当数据量很大的时候，速度会比較慢。</p>
 <p>另外，最后到达的，不一定是最小值，可能只是极小值。</p>
 <p>$\theta$ 要统一賦值，如果有三个参数要更新，必須要等到三个参数的新值都计算好以后，再一起賦值。</p>
