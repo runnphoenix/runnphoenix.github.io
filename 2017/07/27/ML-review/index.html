@@ -23,10 +23,16 @@
 <meta property="og:url" content="http://hanyinggarden.net/2017/07/27/ML-review/index.html">
 <meta property="og:site_name" content="Hanying Garden">
 <meta property="og:description" content="对Coursera上的机器学习课程的总结">
-<meta property="og:updated_time" content="2017-08-03T01:20:14.576Z">
+<meta property="og:image" content="http://hanyinggarden.net/2017/07/27/ML-review/linear_cost_func.png">
+<meta property="og:image" content="http://hanyinggarden.net/2017/07/27/ML-review/gradient.png">
+<meta property="og:image" content="http://hanyinggarden.net/2017/07/27/ML-review/sigmoid.jpg">
+<meta property="og:image" content="http://hanyinggarden.net/2017/07/27/ML-review/logistic_loss_func_total.png">
+<meta property="og:image" content="http://hanyinggarden.net/2017/07/27/ML-review/logistic_loss_func.jpg">
+<meta property="og:updated_time" content="2017-08-26T00:52:51.365Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Coursera 机器学习课程总结 | Hanying Garden">
 <meta name="twitter:description" content="对Coursera上的机器学习课程的总结">
+<meta name="twitter:image" content="http://hanyinggarden.net/2017/07/27/ML-review/linear_cost_func.png">
     
     
     
@@ -253,18 +259,49 @@ classes that you can use:
 </ul>
 </li>
 </ul>
+<h3 id="监督学习-VS-非监督学习"><a href="#监督学习-VS-非监督学习" class="headerlink" title="监督学习 VS. 非监督学习"></a>监督学习 VS. 非监督学习</h3><p>监督学习和非监督学习的区分原则很直观: 给定训练数据的同时，是否也给了每个数据的”正确结果”。举例来说，对于一个图像分类问题，在给定图像的同时，还会给出图像属于哪个分类的说明，这就属于监督学习；而对于聚类算法来说，只是给出一堆数据，要求把数据按照相似性分成几个部分，这就是非监督学习。</p>
+<p><code>强化学习</code>通常被看成是与监督学习和非监督学习并列的一种学习方式。</p>
+<h4 id="线性回归"><a href="#线性回归" class="headerlink" title="线性回归"></a>线性回归</h4><p>线性回归部分，介绍了<code>损失函数</code>、<code>梯度递减</code>的概念，是整个机器学习中最重要的基础。</p>
+<p>损失函数又叫目标函数，可以看作我们的模型预测值与实际值之间差距的大小，损失函数值越小，说明我们的模型越正确。所以，解决一个机器学习问题的总体思路就是: 先得到损失函数，然后调整参数，以使目标函数值达到最小。</p>
+<p>线性回归的损失函数是<br><img src="./linear_cost_func.png" alt="cost func"></p>
+<p>其中，h(x)是我们的假设函数模型<br>$$h_\theta(x) = \theta_0 + \theta_1x_1 + \theta_2x_2 + \cdots + \theta_nx_n$$</p>
+<p>梯度递减就是寻找损失函数最小值的一种方法。其过程类似于我们从山上一步一步走到山谷。数学上来说，就是各个方向的偏导数同步减小的过程。其中，步长和步数是可以调整的参数。步长大小要合适，长度太长的话，会容易”跑到对面山上去”，整个地图乱跑；太小的话，在一定的步数之內，可能尚未到达最小点。到达最小点之后，将会在附近徘徊。</p>
+<p><img src="./gradient.png" alt="gradient"></p>
+<p>这种递减方式叫做<code>批量梯度递减</code>，因為每次递减都需要所有的训练数据参与，当数据量很大的时候，速度会比較慢。</p>
+<p>另外，最后到达的，不一定是最小值，可能只是极小值。</p>
+<p>$\theta$ 要统一賦值，如果有三个参数要更新，必須要等到三个参数的新值都计算好以后，再一起賦值。</p>
+<p><code>归一化</code>：如果两种特征的值域相差很大，需要将其统一到［-1,1]的范围內。<strong>要注意归一化和正则化的区别。</strong></p>
+<h4 id="逻辑回归"><a href="#逻辑回归" class="headerlink" title="逻辑回归"></a>逻辑回归</h4><p>逻辑回归本貭上是个分类问題，引入了<code>sigmoid函數</code>：<br><img src="./sigmoid.jpg" alt="sigmoid"></p>
+<p>$$ g(z) = \frac{1}{1+e^{-z}} $$</p>
+<p>整合输入之后模型变成：</p>
+<p>$$ h_\theta(x) = \frac{1}{1+e^{-\theta^Tx}} $$</p>
+<p>线性回归的损失函数是<strong>相减得到误差，累计误差平方然后求平均</strong>，逻辑回归不一样，逻辑回归是靠<strong>log函数得到误差，而且不再求平方，直接累计误差求平均</strong>。</p>
+<p><img src="./logistic_loss_func_total.png" alt="cost function"></p>
+<p><img src="./logistic_loss_func.jpg" alt="logistic"></p>
+<p>sigmoid函数将模型的值域固定在0到1之间，在损失函数中，该值域变成了作用域。从上图可以看出，若y=1，$h_θ(x)$接近1时，损失函数几乎为0，反之，当其接近0时，惩罚将会非常快速地增长。y=0时也是一样的道理。</p>
 <h3 id="正则化"><a href="#正则化" class="headerlink" title="正则化"></a>正则化</h3><p>正则化同样是机器学习中一个极其重要的概念，主要是为了防止出现<code>过拟合</code>问题。所谓过拟合，就是过分解读了训练数据的意义，导致模型过度契合训练数据，泛化能力不够，面对新的数据时，反而不能得到正确结果。</p>
 <h3 id="神经网络"><a href="#神经网络" class="headerlink" title="神经网络"></a>神经网络</h3><p>神经网络可以说是当前机器学习中最重要的一个分支。本部分没有介绍<code>CNN</code>、<code>RNN</code>等神经网络，而是介绍了神经网络的一般原理，是后续学习的重要基础。</p>
+<p>神经网络部分，绝大多数内容都比较简单。难度比较大，也是最重要的，是反响传播算法的推导和理解。 </p>
+<h5 id="反响传播算法的推导"><a href="#反响传播算法的推导" class="headerlink" title="反响传播算法的推导"></a>反响传播算法的推导</h5><p> 推导过程说不上难度有多大，但需要静下心来仔细看一下推导的过程，关键一点要理解好$\delta$的含义。</p>
+<p>其他两点比较重要的内容，是Gradient Checking和参数的随机初始化。</p>
+<h5 id="参数随机化"><a href="#参数随机化" class="headerlink" title="参数随机化"></a>参数随机化</h5><p>在线性回归和逻辑回归(有木有SVM?）中，我们都将$\theta$初始化为0。但这在神经网络中行不通了，因为这会导致每一层神经网络上的不同神经元值都一样，即大家都只能学习到一个特征。</p>
+<h5 id="Gradient-Checking"><a href="#Gradient-Checking" class="headerlink" title="Gradient Checking"></a>Gradient Checking</h5><p>梯度检查可以看作是为防止出错而设立的一种保险措施。</p>
 <h3 id="方法论-应用建议和系统设计"><a href="#方法论-应用建议和系统设计" class="headerlink" title="方法论 - 应用建议和系统设计"></a>方法论 - 应用建议和系统设计</h3><p>本部分虽然没有介绍具体的某个技术，但却是解决实际问题的指导思想，是指引我们前行的红星和旗帜 :P 。主要包括：选择模型、判断欠拟合和过拟合、学习曲线、错误分析、<code>Precision和recall的折衷</code>等等。</p>
-<h3 id="支持向量机"><a href="#支持向量机" class="headerlink" title="支持向量机"></a>支持向量机</h3><p>支持向量机跟逻辑回归一样，也是一种分类算法，可以将其看作一种更加复杂的逻辑回归。</p>
+<h4 id="建议"><a href="#建议" class="headerlink" title="建议"></a>建议</h4><h5 id="为什么要有CV"><a href="#为什么要有CV" class="headerlink" title="为什么要有CV?"></a>为什么要有CV?</h5><h5 id="三条曲线"><a href="#三条曲线" class="headerlink" title="三条曲线"></a>三条曲线</h5><h4 id="系统设计"><a href="#系统设计" class="headerlink" title="系统设计"></a>系统设计</h4><h5 id="跑偏的错误分析"><a href="#跑偏的错误分析" class="headerlink" title="跑偏的错误分析"></a>跑偏的错误分析</h5><h5 id="F1-score"><a href="#F1-score" class="headerlink" title="F1 score"></a>F1 score</h5><h3 id="支持向量机"><a href="#支持向量机" class="headerlink" title="支持向量机"></a>支持向量机</h3><p>支持向量机跟逻辑回归一样，也是一种分类算法，可以将其看作一种更加复杂的逻辑回归。</p>
+<p>支持向量机內容比较晦澀。花费了大量的时间学习，依旧是一知半解。</p>
+<p>吴恩达教授主要讲了两部分的内容: large margin和核函数。</p>
+<p>支持向量机相比逻辑回归最大的优势在于，其可以选择”最保险”的分类方案。即当有多种方案可以选择的时候，支持向量机可以选择使分界线到两边数据的margin最大的方案。</p>
+<p>当分界线不是直线比较复杂的时候，可以使用核函数来代替$x_1$ $x_1^2$ $x_1x_2$等选择，能够达到更好的分类结果。</p>
 <h3 id="非监督学习"><a href="#非监督学习" class="headerlink" title="非监督学习"></a>非监督学习</h3><p>非监督学习部分，主要介绍了四种算法：<code>聚类</code>，<code>降维</code>，<code>异常检测</code>，<code>推荐系统</code>。</p>
 <p>聚类算法总体来说就是要求将数据按照相关性分成几个类。</p>
 <p>降维算法将数据做简化，同时保留数据最重要的特征。</p>
 <p>异常检测就是检测到异常数据，比如网站检测行为异常的用户，从计算机集群中发现运行状况异常的计算机等等。</p>
 <p>推荐系统很常见，比如在购物网站会给我们推荐新商品；视频网站会根据我们的观看记录推荐新的视频等等。</p>
+<h4 id="PCA"><a href="#PCA" class="headerlink" title="PCA"></a>PCA</h4><p>在SVD之前，为什么要对数据求协方差矩阵?</p>
+<p>数据X的协方差矩阵，实际上是数据各个特征的协方差矩阵。</p>
+<p>通过这个协方差矩阵，可以看出数据特征之间的依赖关系。</p>
 <h3 id="大规模机器学习和应用举例"><a href="#大规模机器学习和应用举例" class="headerlink" title="大规模机器学习和应用举例"></a>大规模机器学习和应用举例</h3><p>大规模数据学习介绍了两种非常重要的梯度下降算法：<code>小批量梯度下降</code>和<code>随机梯度下降</code>，在数据量非常大的时候能显著减少训练时间。此外，还介绍了google的<code>map-reduce</code>架构和并行数据处理。</p>
 <p>本课程在最后一部分举了一个实际应用的例子：照片OCR处理。结合这个例子，又介绍了如何获取更多训练数据、如何分析系统瓶颈等问题。</p>
-<h2 id="分章节总结"><a href="#分章节总结" class="headerlink" title="分章节总结"></a>分章节总结</h2><p><a href="http://hanyinggarden.net/2017/08/02/ML-review-1/">篇一 - 线性回归和逻辑回归</a></p>
 
   </section>
 
