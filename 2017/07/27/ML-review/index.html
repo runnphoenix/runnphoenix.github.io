@@ -26,7 +26,7 @@
 <meta property="og:image" content="http://hanyinggarden.net/2017/07/27/ML-review/linear_cost_func.png">
 <meta property="og:image" content="http://hanyinggarden.net/2017/07/27/ML-review/gradient.png">
 <meta property="og:image" content="http://hanyinggarden.net/2017/07/27/ML-review/logistic_loss_func_total.png">
-<meta property="og:updated_time" content="2017-08-26T01:58:17.796Z">
+<meta property="og:updated_time" content="2017-08-28T08:11:39.825Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Coursera 机器学习课程总结 | Hanying Garden">
 <meta name="twitter:description" content="对Coursera上的机器学习课程的总结">
@@ -288,19 +288,18 @@ classes that you can use:
 <p>前两条曲线形状基本一致，只是左右方向相反。这很容易理解，因为lambda就是为了防止d太大导致过拟合而出现的。</p>
 <p>数据量很少的时候，模型能很好的适应训练数据，所以训练的error很小，但是由于模型并没有被训练好，验证集的error会很高；随着数据量增多，模型并不能保证满足所有的训练数据，所以error会增大，而验证集会因为模型越来越好而减小错误。</p>
 <h4 id="跑偏的错误分析"><a href="#跑偏的错误分析" class="headerlink" title="跑偏的错误分析"></a>跑偏的错误分析</h4><p>如果数据集中两个分类的数量差别很大，比如99%都是A类，1%是B类，那么我们即使都判断为是A类，也能有99%的正确率。因此我们需要其他的方式来进行判断。<br>Precision: 预测为A类的数据中，真正是A类的数据的比例<br>Recall: 真正是A类的数据中，预测为A类的比例</p>
-<h4 id="F1-score"><a href="#F1-score" class="headerlink" title="F1 score"></a>F1 score</h4><p>2PR/(p+R)</p>
-<h3 id="支持向量机"><a href="#支持向量机" class="headerlink" title="支持向量机"></a>支持向量机</h3><p>支持向量机跟逻辑回归一样，也是一种分类算法，可以将其看作一种更加复杂的逻辑回归。</p>
-<p>支持向量机內容比较晦澀。花费了大量的时间学习，依旧是一知半解。</p>
-<p>吴恩达教授主要讲了两部分的内容: large margin和核函数。</p>
+<h4 id="F1-score"><a href="#F1-score" class="headerlink" title="F1 score"></a>F1 score</h4><p>这里讲的主要是Precision和Recall的折衷问题。如果我们把确信值定的很好，比如0.9, 那Precision值就会很高，但是Recall就会很低；如果确信值定的低，那么会是相反的情况。</p>
+<p>这就引出了如何在Precision和Recall之间进行选择的问题，答案就是F1值: F1 = 2PR/(P+R)。我们应使F1值尽量大。</p>
+<h3 id="支持向量机"><a href="#支持向量机" class="headerlink" title="支持向量机"></a>支持向量机</h3><p>支持向量机內容比较晦澀。花费了大量的时间学习，依旧是一知半解。吴恩达教授主要讲了两部分的内容: large margin和核函数。</p>
 <p>支持向量机相比逻辑回归最大的优势在于，其可以选择”最保险”的分类方案。即当有多种方案可以选择的时候，支持向量机可以选择使分界线到两边数据的margin最大的方案。</p>
-<p>当分界线不是直线比较复杂的时候，可以使用核函数来代替$x_1$ $x_1^2$ $x_1x_2$等选择，能够达到更好的分类结果。</p>
+<p>当分界线不是直线而是比较复杂的曲线的时候，可以使用核函数来代替$x_1$， $x_1^2$， $x_1x_2$等选择，能够达到更好的分类结果。</p>
 <h3 id="非监督学习"><a href="#非监督学习" class="headerlink" title="非监督学习"></a>非监督学习</h3><p>非监督学习部分，主要介绍了四种算法：<code>聚类</code>，<code>降维</code>，<code>异常检测</code>，<code>推荐系统</code>。</p>
-<h4 id="PCA"><a href="#PCA" class="headerlink" title="PCA"></a>PCA</h4><p>在SVD之前，为什么要对数据求协方差矩阵?</p>
-<p>数据X的协方差矩阵，实际上是数据各个特征的协方差矩阵。</p>
-<p>通过这个协方差矩阵，可以看出数据特征之间的依赖关系。</p>
+<h4 id="PCA"><a href="#PCA" class="headerlink" title="PCA"></a>PCA</h4><p>在SVD之前，要对数据求协方差矩阵。事实上，之前在各特征（而不是各个数据）上进行的归一化处理也是求协方差矩阵的一部分。数据X的协方差矩阵，实际上是数据各个特征之间的协方差矩阵。通过这个协方差矩阵，可以看出数据特征之间的依赖关系。</p>
 <h3 id="大规模机器学习和应用举例"><a href="#大规模机器学习和应用举例" class="headerlink" title="大规模机器学习和应用举例"></a>大规模机器学习和应用举例</h3><p>大规模数据学习介绍了两种非常重要的梯度下降算法：<code>小批量梯度下降</code>和<code>随机梯度下降</code>，在数据量非常大的时候能显著减少训练时间。此外，还介绍了google的<code>map-reduce</code>架构和并行数据处理。</p>
 <p>本课程在最后一部分举了一个实际应用的例子：照片OCR处理。结合这个例子，又介绍了如何获取更多训练数据、如何分析系统瓶颈等问题。</p>
-<h4 id="分析系统瓶颈"><a href="#分析系统瓶颈" class="headerlink" title="分析系统瓶颈"></a>分析系统瓶颈</h4>
+<h4 id="分析系统瓶颈"><a href="#分析系统瓶颈" class="headerlink" title="分析系统瓶颈"></a>分析系统瓶颈</h4><p>机器学习系统一般都由几个模块组成，如果最终结果不够理想，我们应该选择哪个模块进行改善?</p>
+<p>方法就是，通过人工将某个模块的正确率提升为100%, 然后查看整个系统最后的提升是多少。提升最大的模块，就是但前系统的瓶颈所在，应该优先对该模块做出改善。</p>
+
   </section>
 
   
