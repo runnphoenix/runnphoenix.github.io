@@ -7,7 +7,7 @@
     
 
     <title>
-      Coursera 机器学习课程总结 | Hanying Garden 
+      机器学习经验和总结 | Hanying Garden 
     </title>
 
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
@@ -16,21 +16,17 @@
     
     
 
-    <meta name="description" content="对Coursera上的机器学习课程的总结">
-<meta name="keywords" content="ML">
+    <meta name="description" content="机器学习一年多的总结">
+<meta name="keywords" content="Machine Learning,Deep Learning">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Coursera 机器学习课程总结 | Hanying Garden">
+<meta property="og:title" content="机器学习经验和总结 | Hanying Garden">
 <meta property="og:url" content="http://hanyinggarden.net/2017/07/27/ML-review/index.html">
 <meta property="og:site_name" content="Hanying Garden">
-<meta property="og:description" content="对Coursera上的机器学习课程的总结">
-<meta property="og:image" content="http://hanyinggarden.net/2017/07/27/ML-review/linear_cost_func.png">
-<meta property="og:image" content="http://hanyinggarden.net/2017/07/27/ML-review/gradient.png">
-<meta property="og:image" content="http://hanyinggarden.net/2017/07/27/ML-review/logistic_loss_func_total.png">
-<meta property="og:updated_time" content="2017-08-28T08:11:39.825Z">
+<meta property="og:description" content="机器学习一年多的总结">
+<meta property="og:updated_time" content="2017-12-29T15:39:04.190Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Coursera 机器学习课程总结 | Hanying Garden">
-<meta name="twitter:description" content="对Coursera上的机器学习课程的总结">
-<meta name="twitter:image" content="http://hanyinggarden.net/2017/07/27/ML-review/linear_cost_func.png">
+<meta name="twitter:title" content="机器学习经验和总结 | Hanying Garden">
+<meta name="twitter:description" content="机器学习一年多的总结">
     
     
     
@@ -196,7 +192,7 @@ classes that you can use:
 
   <header class="post-header">
     
-    <h1 class="post-title">Coursera 机器学习课程总结</h1>
+    <h1 class="post-title">机器学习经验和总结</h1>
 
     
 
@@ -215,7 +211,7 @@ classes that you can use:
           
              &#8226; 标签:
             <font class="tags">
-              <a class="tags-link" href="/tags/ML/">ML</a>
+              <a class="tags-link" href="/tags/Deep-Learning/">Deep Learning</a>, <a class="tags-link" href="/tags/Machine-Learning/">Machine Learning</a>
             </font>
           
 
@@ -228,77 +224,28 @@ classes that you can use:
 
   <section id="post-content" class="article-content post">
     <a id="more"></a>
-<p>人工智能和机器学习最近几年出现井喷式发展，私以为机器学习非常有可能成为将来程序员的必备技能，这是时代对我们提出的新要求。吴恩达教授在coursera上教授的Machine Learning课程，可以说是入门机器学习的最佳选择。我在2016年完成了此门课程的学习，但在后续课程的学习过程中，发现自己对这门课程的掌握并不牢固。本文将对自己的学习过程和所得进行简单的总结，希望借此打下更牢固的基础。</p>
-<h2 id="课程大纲"><a href="#课程大纲" class="headerlink" title="课程大纲"></a>课程大纲</h2><ul>
-<li>机器学习<ul>
-<li>监督学习<ul>
-<li>线性回归<ul>
-<li>单变量线性回归</li>
-<li>多变量线性回归</li>
-</ul>
+<p>人工智能和机器学习最近几年出现井喷式发展，近来更是成为全社会关注的焦点，我也有幸成为了学习大军中的一员。</p>
+<h2 id="机器学习的局限性"><a href="#机器学习的局限性" class="headerlink" title="机器学习的局限性"></a>机器学习的局限性</h2><p>随着学习的不断深入，逐渐意识到现在机器学习的局限性。现在的机器学习距离真正的人工智能还差得很远。</p>
+<p>当下机器学习特别是监督学习的本质，是建立一个模型，并<strong>有效地</strong>学习了大量数据来对模型进行了调整和拟合。这样当遇到新的此类问题的时候，就可以根据模型来进行预测。</p>
+<p>如果接下来几年时间不能继续取得突破性进展，人工智能可能会成为下一轮的泡沫。</p>
+<h2 id="主要课程"><a href="#主要课程" class="headerlink" title="主要课程"></a>主要课程</h2><ul>
+<li><p>机器学习， Coursera</p>
+<p>  吴恩达教授的这门课程，是入门的不二之选。课程并没有深入热门的深度学习，而是专注于机器学习的基础理论和分析。通过学习这门课程，可以获得机器学习的方法论知识，从大局上来更好地把握。</p>
+<p>  课程采用Octave语言，作业很经典，一定要完成。</p>
 </li>
-<li>逻辑回归</li>
-<li>正则化</li>
-<li>神经网络</li>
-<li>机器学习应用建议</li>
-<li>机器学习系统设计</li>
-<li>支持向量机</li>
-</ul>
+<li><p>CS231n，斯坦福大学<br>计算机视觉课程，也对RNN进行了讲解。</p>
+<p>  课程采用python语言，包含三个作业，基本将机器学习的各个组件都实现了一遍。如果掌握充分，基本可以在此基础上实现一个机器学习的框架了。</p>
 </li>
-<li>非监督学习<ul>
-<li>聚类算法</li>
-<li>降维算法</li>
-<li>异常检测</li>
-<li>推荐系统</li>
-</ul>
+<li><p>Deep Learning，Udacity</p>
+<p>  这门课程是Google制作的，特点是短小精悍。视频时间很短，丝毫不浪费笔墨。<br>  课程也包含了四个作业，因为是Google制作的课程，肯定是使用Tensorflow框架，刚好与CS231n课程作业形成互补，可以专注于问题的解决而非框架的实现。</p>
 </li>
-<li>大规模机器学习</li>
-<li>应用举例: OCR</li>
-</ul>
+<li><p>CS224n， 斯坦福大学</p>
+<p>  自然语言处理课程，目前只大略学习了视频，还没有做作业。</p>
+</li>
+<li><p>强化学习</p>
+<p>  强化学习和GAN等非监督学习目前看来是最有可能实现突破的方向。 最近Alpha Zero可以说是非常惊艳，但在星际争霸2项目上遭遇到了瓶颈。</p>
 </li>
 </ul>
-<h3 id="监督学习-VS-非监督学习"><a href="#监督学习-VS-非监督学习" class="headerlink" title="监督学习 VS. 非监督学习"></a>监督学习 VS. 非监督学习</h3><p>监督学习和非监督学习的区分原则很直观: 给定训练数据的同时，是否也给了每个数据的”正确结果”。举例来说，对于一个图像分类问题，在给定图像的同时，还会给出图像属于哪个分类的说明，这就属于监督学习；而对于聚类算法来说，只是给出一堆数据，要求把数据按照相似性分成几个部分，这就是非监督学习。</p>
-<p><code>强化学习</code>通常被看成是与监督学习和非监督学习并列的一种学习方式。</p>
-<h3 id="线性回归"><a href="#线性回归" class="headerlink" title="线性回归"></a>线性回归</h3><p>线性回归部分，介绍了<code>损失函数</code>、<code>梯度递减</code>的概念，是整个机器学习中最重要的基础。</p>
-<p>损失函数又叫目标函数，可以看作我们的模型预测值与实际值之间差距的大小，损失函数值越小，说明我们的模型越正确。所以，解决一个机器学习问题的总体思路就是: 先得到损失函数，然后调整参数，以使目标函数值达到最小。</p>
-<p>线性回归的损失函数是<br><img src="./linear_cost_func.png" alt="cost func"></p>
-<p>其中，h(x)是我们的假设函数模型<br>$$h_\theta(x) = \theta_0 + \theta_1x_1 + \theta_2x_2 + \cdots + \theta_nx_n$$</p>
-<p>梯度递减就是寻找损失函数最小值的一种方法。其过程类似于我们从山上一步一步走到山谷。数学上来说，就是各个方向的偏导数同步减小的过程。其中，步长和步数是可以调整的参数。步长大小要合适，长度太长的话，会容易”跑到对面山上去”，整个地图乱跑；太小的话，在一定的步数之內，可能尚未到达最小点。到达最小点之后，将会在附近徘徊。</p>
-<p><img src="./gradient.png" alt="gradient"></p>
-<p>这种递减方式叫做<code>批量梯度递减</code>，因為每次递减都需要所有的训练数据参与，当数据量很大的时候，速度会比較慢。</p>
-<p>另外，最后到达的，不一定是最小值，可能只是极小值。</p>
-<p>$\theta$ 要统一賦值，如果有三个参数要更新，必須要等到三个参数的新值都计算好以后，再一起賦值。</p>
-<p><code>归一化</code>：如果两种特征的值域相差很大，需要将其统一到［-1,1]的范围內。<strong>要注意归一化和正则化的区别。</strong></p>
-<h4 id="逻辑回归"><a href="#逻辑回归" class="headerlink" title="逻辑回归"></a>逻辑回归</h4><p>逻辑回归本貭上是个分类问題，引入了<code>sigmoid函數</code>：</p>
-<p>$$ g(z) = \frac{1}{1+e^{-z}} $$</p>
-<p>整合输入之后模型变成：</p>
-<p>$$ h_\theta(x) = \frac{1}{1+e^{-\theta^Tx}} $$</p>
-<p>线性回归的损失函数是<strong>相减得到误差，累计误差平方然后求平均</strong>，逻辑回归不一样，逻辑回归是靠<strong>log函数得到误差，而且不再求平方，直接累计误差求平均</strong>。</p>
-<p><img src="./logistic_loss_func_total.png" alt="cost function"></p>
-<p>sigmoid函数将模型的值域固定在0到1之间，在损失函数中，该值域变成了作用域。从上图可以看出，若y=1，$h_θ(x)$接近1时，损失函数几乎为0，反之，当其接近0时，惩罚将会非常快速地增长。y=0时也是一样的道理。</p>
-<h3 id="正则化"><a href="#正则化" class="headerlink" title="正则化"></a>正则化</h3><p>正则化同样是机器学习中一个极其重要的概念，主要是为了防止出现<code>过拟合</code>问题。所谓过拟合，就是过分解读了训练数据的意义，导致模型过度契合训练数据，泛化能力不够，面对新的数据时，反而不能得到正确结果。</p>
-<h3 id="神经网络"><a href="#神经网络" class="headerlink" title="神经网络"></a>神经网络</h3><p>神经网络可以说是当前机器学习中最重要的一个分支。本部分没有介绍<code>CNN</code>、<code>RNN</code>等神经网络，而是介绍了神经网络的一般原理，是后续学习的重要基础。</p>
-<p>神经网络部分，绝大多数内容都比较简单。难度比较大，也是最重要的，是反向传播算法的推导和理解。 </p>
-<h4 id="反响传播算法的推导"><a href="#反响传播算法的推导" class="headerlink" title="反响传播算法的推导"></a>反响传播算法的推导</h4><p> 推导过程说不上难度有多大，但需要静下心来仔细看一下推导的过程，关键一点要理解好$\delta$的含义。</p>
-<h4 id="参数随机化"><a href="#参数随机化" class="headerlink" title="参数随机化"></a>参数随机化</h4><p>在线性回归和逻辑回归(有木有SVM?）中，我们都将$\theta$初始化为0。但这在神经网络中行不通了，因为这会导致每一层神经网络上的不同神经元值都一样，即只能学习到一个特征。</p>
-<h4 id="Gradient-Checking"><a href="#Gradient-Checking" class="headerlink" title="Gradient Checking"></a>Gradient Checking</h4><p>梯度检查可以看作是为防止出错而设立的一种保险措施。</p>
-<h3 id="方法论-应用建议和系统设计"><a href="#方法论-应用建议和系统设计" class="headerlink" title="方法论 - 应用建议和系统设计"></a>方法论 - 应用建议和系统设计</h3><p>本部分虽然没有介绍具体的某个技术，但却是解决实际问题的指导思想，是指引我们前行的红星和旗帜 :P 。主要包括：选择模型、判断欠拟合和过拟合、学习曲线、错误分析、<code>Precision和recall的折衷</code>等等。</p>
-<h4 id="为什么要有CV"><a href="#为什么要有CV" class="headerlink" title="为什么要有CV?"></a>为什么要有CV?</h4><p>只分为训练数据和测试数据的话，在我们根据测试结果不断进行参数调整的过程中，实际上已经把测试数据也掺合进来了。所以，需要把数据集分成三个部分，再添加CV，使用CV来进行参数的调整，测试数据只负责测试，这样就能保证测试数据的公正性和独立性。</p>
-<h4 id="三条曲线"><a href="#三条曲线" class="headerlink" title="三条曲线"></a>三条曲线</h4><p>第一条以模型的次数d为自变量，第二条以$\lambda$为自变量，第三条是学习曲线，以训练数据的数量m为自变量。三条曲线纵轴都是error。</p>
-<p>前两条曲线形状基本一致，只是左右方向相反。这很容易理解，因为lambda就是为了防止d太大导致过拟合而出现的。</p>
-<p>数据量很少的时候，模型能很好的适应训练数据，所以训练的error很小，但是由于模型并没有被训练好，验证集的error会很高；随着数据量增多，模型并不能保证满足所有的训练数据，所以error会增大，而验证集会因为模型越来越好而减小错误。</p>
-<h4 id="跑偏的错误分析"><a href="#跑偏的错误分析" class="headerlink" title="跑偏的错误分析"></a>跑偏的错误分析</h4><p>如果数据集中两个分类的数量差别很大，比如99%都是A类，1%是B类，那么我们即使都判断为是A类，也能有99%的正确率。因此我们需要其他的方式来进行判断。<br>Precision: 预测为A类的数据中，真正是A类的数据的比例<br>Recall: 真正是A类的数据中，预测为A类的比例</p>
-<h4 id="F1-score"><a href="#F1-score" class="headerlink" title="F1 score"></a>F1 score</h4><p>这里讲的主要是Precision和Recall的折衷问题。如果我们把确信值定的很好，比如0.9, 那Precision值就会很高，但是Recall就会很低；如果确信值定的低，那么会是相反的情况。</p>
-<p>这就引出了如何在Precision和Recall之间进行选择的问题，答案就是F1值: F1 = 2PR/(P+R)。我们应使F1值尽量大。</p>
-<h3 id="支持向量机"><a href="#支持向量机" class="headerlink" title="支持向量机"></a>支持向量机</h3><p>支持向量机內容比较晦澀。花费了大量的时间学习，依旧是一知半解。吴恩达教授主要讲了两部分的内容: large margin和核函数。</p>
-<p>支持向量机相比逻辑回归最大的优势在于，其可以选择”最保险”的分类方案。即当有多种方案可以选择的时候，支持向量机可以选择使分界线到两边数据的margin最大的方案。</p>
-<p>当分界线不是直线而是比较复杂的曲线的时候，可以使用核函数来代替$x_1$， $x_1^2$， $x_1x_2$等选择，能够达到更好的分类结果。</p>
-<h3 id="非监督学习"><a href="#非监督学习" class="headerlink" title="非监督学习"></a>非监督学习</h3><p>非监督学习部分，主要介绍了四种算法：<code>聚类</code>，<code>降维</code>，<code>异常检测</code>，<code>推荐系统</code>。</p>
-<h4 id="PCA"><a href="#PCA" class="headerlink" title="PCA"></a>PCA</h4><p>在SVD之前，要对数据求协方差矩阵。事实上，之前在各特征（而不是各个数据）上进行的归一化处理也是求协方差矩阵的一部分。数据X的协方差矩阵，实际上是数据各个特征之间的协方差矩阵。通过这个协方差矩阵，可以看出数据特征之间的依赖关系。</p>
-<h3 id="大规模机器学习和应用举例"><a href="#大规模机器学习和应用举例" class="headerlink" title="大规模机器学习和应用举例"></a>大规模机器学习和应用举例</h3><p>大规模数据学习介绍了两种非常重要的梯度下降算法：<code>小批量梯度下降</code>和<code>随机梯度下降</code>，在数据量非常大的时候能显著减少训练时间。此外，还介绍了google的<code>map-reduce</code>架构和并行数据处理。</p>
-<p>本课程在最后一部分举了一个实际应用的例子：照片OCR处理。结合这个例子，又介绍了如何获取更多训练数据、如何分析系统瓶颈等问题。</p>
-<h4 id="分析系统瓶颈"><a href="#分析系统瓶颈" class="headerlink" title="分析系统瓶颈"></a>分析系统瓶颈</h4><p>机器学习系统一般都由几个模块组成，如果最终结果不够理想，我们应该选择哪个模块进行改善?</p>
-<p>方法就是，通过人工将某个模块的正确率提升为100%, 然后查看整个系统最后的提升是多少。提升最大的模块，就是但前系统的瓶颈所在，应该优先对该模块做出改善。</p>
 
   </section>
 
