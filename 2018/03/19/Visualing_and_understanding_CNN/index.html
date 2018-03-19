@@ -58,7 +58,7 @@
 <meta property="og:image" content="http://hanyinggarden.net/2018/03/19/Visualing_and_understanding_CNN/image/style_transfer_structure.png">
 <meta property="og:image" content="http://hanyinggarden.net/2018/03/19/Visualing_and_understanding_CNN/image/fast_style_transfer.png">
 <meta property="og:image" content="http://hanyinggarden.net/2018/03/19/Visualing_and_understanding_CNN/image/fast_style_transfer_structure.png">
-<meta property="og:updated_time" content="2018-03-19T04:24:35.162Z">
+<meta property="og:updated_time" content="2018-03-19T13:06:51.852Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="学习笔记-CNN网络的可视化和理解（CS231n Lecture12 2017） | Hanying Garden">
 <meta name="twitter:description" content="学习笔记：CNN网络的可视化和理解">
@@ -263,7 +263,7 @@ classes that you can use:
 <h2 id="Intro"><a href="#Intro" class="headerlink" title="Intro"></a>Intro</h2><p>Lecture 12从多个角度对CNN网络进行分析和理解。我的理解肯定会有很多错误之处，欢迎指出，共同进步！</p>
 <h2 id="课程内容"><a href="#课程内容" class="headerlink" title="课程内容"></a>课程内容</h2><h3 id="First-Layer-Visualize-Filters"><a href="#First-Layer-Visualize-Filters" class="headerlink" title="First Layer: Visualize Filters"></a>First Layer: Visualize Filters</h3><p>第一层卷积，可以直接看到Filter学习到的特征。<br><img src="image/first_layer_filters.png" alt=""></p>
 <h3 id="Visualize-filters-at-higher-layers"><a href="#Visualize-filters-at-higher-layers" class="headerlink" title="Visualize filters at higher layers"></a>Visualize filters at higher layers</h3><p>中间卷积层的Filters，可以查看内容（卷积核是4维，故展示出来是图像组成的二维矩阵），但是不能直观的查看学习到了什么特征。<br><img src="image/intermediate_filters.png" alt=""></p>
-<p>And Why？</p>
+<p>Why？因为只有第一层才是可以直观理解的图片，中间层已经不是可以直观理解的，再次基础上的Filter也不能直观来理解。</p>
 <h3 id="Last-Layer"><a href="#Last-Layer" class="headerlink" title="Last Layer"></a>Last Layer</h3><p>指最后的全连接层，代表图片最后的特征向量。</p>
 <h4 id="Nearest-Neighbors"><a href="#Nearest-Neighbors" class="headerlink" title="Nearest Neighbors"></a>Nearest Neighbors</h4><p>最后得到的特征向量相似，那么输入图片肯定也相似。<br><img src="image/neareast_neighbors.png" alt=""><br>其中左边是通过KNN来找到的最相近图片，右边是CNN实现的。可以发现，左侧只是找到了观感上相近的图片（青蛙跟猫的姿势和方向类似），甚至不能保证是同一类别，正确率很低；而右侧则很好地完成了任务，与物体方向相关性不强。</p>
 <p>个人观点，搜索引擎的图片查找功能，可以通过类似的思路实现。</p>
