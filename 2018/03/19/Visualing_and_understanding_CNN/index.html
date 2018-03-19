@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+
+    
+
+    <title>
+      学习笔记-CNN网络的可视化和理解（CS231n Lecture12 2017） | Hanying Garden 
+    </title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    
+      <meta name="author" content="Zhang Hanying">
+    
+    
+
+    <meta name="description" content="学习笔记：CNN网络的可视化和理解">
+<meta name="keywords" content="CNN">
+<meta property="og:type" content="article">
+<meta property="og:title" content="学习笔记-CNN网络的可视化和理解（CS231n Lecture12 2017） | Hanying Garden">
+<meta property="og:url" content="http://hanyinggarden.net/2018/03/19/Visualing_and_understanding_CNN/index.html">
+<meta property="og:site_name" content="Hanying Garden">
+<meta property="og:description" content="学习笔记：CNN网络的可视化和理解">
+<meta property="og:image" content="http://hanyinggarden.net/2018/03/19/Visualing_and_understanding_CNN/image/first_layer_filters.png">
+<meta property="og:image" content="http://hanyinggarden.net/2018/03/19/Visualing_and_understanding_CNN/image/intermediate_filters.png">
+<meta property="og:image" content="http://hanyinggarden.net/2018/03/19/Visualing_and_understanding_CNN/image/neareast_neighbors.png">
+<meta property="og:image" content="http://hanyinggarden.net/2018/03/19/Visualing_and_understanding_CNN/image/dimentionality.png">
+<meta property="og:image" content="http://hanyinggarden.net/2018/03/19/Visualing_and_understanding_CNN/image/visual_activations.png">
+<meta property="og:image" content="http://hanyinggarden.net/2018/03/19/Visualing_and_understanding_CNN/image/maximally_activating_patches.png">
+<meta property="og:image" content="http://hanyinggarden.net/2018/03/19/Visualing_and_understanding_CNN/image/occlusion.png">
+<meta property="og:image" content="http://hanyinggarden.net/2018/03/19/Visualing_and_understanding_CNN/image/occlusion_results.png">
+<meta property="og:image" content="http://hanyinggarden.net/2018/03/19/Visualing_and_understanding_CNN/image/saliency.png">
+<meta property="og:image" content="http://hanyinggarden.net/2018/03/19/Visualing_and_understanding_CNN/image/saliency_segment.png">
+<meta property="og:image" content="http://hanyinggarden.net/2018/03/19/Visualing_and_understanding_CNN/image/guided.png">
+<meta property="og:image" content="http://hanyinggarden.net/2018/03/19/Visualing_and_understanding_CNN/image/guided_backprop.png">
+<meta property="og:image" content="http://hanyinggarden.net/2018/03/19/Visualing_and_understanding_CNN/image/gradient_ascent.png">
+<meta property="og:image" content="http://hanyinggarden.net/2018/03/19/Visualing_and_understanding_CNN/image/gradient_ascent_regularizer.png">
+<meta property="og:image" content="http://hanyinggarden.net/2018/03/19/Visualing_and_understanding_CNN/image/regularizer_easy.png">
+<meta property="og:image" content="http://hanyinggarden.net/2018/03/19/Visualing_and_understanding_CNN/image/regularizer_complex.png">
+<meta property="og:image" content="http://hanyinggarden.net/2018/03/19/Visualing_and_understanding_CNN/image/regularizer_complex_result.png">
+<meta property="og:image" content="http://hanyinggarden.net/2018/03/19/Visualing_and_understanding_CNN/image/gradient_ascent_intermediate.png">
+<meta property="og:image" content="http://hanyinggarden.net/2018/03/19/Visualing_and_understanding_CNN/image/fooling_iamges.png">
+<meta property="og:image" content="http://hanyinggarden.net/2018/03/19/Visualing_and_understanding_CNN/image/deep_dream_method.png">
+<meta property="og:image" content="http://hanyinggarden.net/2018/03/19/Visualing_and_understanding_CNN/image/deep_dream_begin_layers.png">
+<meta property="og:image" content="http://hanyinggarden.net/2018/03/19/Visualing_and_understanding_CNN/image/deep_dream.png">
+<meta property="og:image" content="http://hanyinggarden.net/2018/03/19/Visualing_and_understanding_CNN/image/deep_dream_other_datasets.png">
+<meta property="og:image" content="http://hanyinggarden.net/2018/03/19/Visualing_and_understanding_CNN/image/feature_inversion.png">
+<meta property="og:image" content="http://hanyinggarden.net/2018/03/19/Visualing_and_understanding_CNN/image/feature_inversion_method.png">
+<meta property="og:image" content="http://hanyinggarden.net/2018/03/19/Visualing_and_understanding_CNN/image/gram_matrix.png">
+<meta property="og:image" content="http://hanyinggarden.net/2018/03/19/Visualing_and_understanding_CNN/image/texture_synthesis.png">
+<meta property="og:image" content="http://hanyinggarden.net/2018/03/19/Visualing_and_understanding_CNN/image/texture_synthesis_nn.png">
+<meta property="og:image" content="http://hanyinggarden.net/2018/03/19/Visualing_and_understanding_CNN/image/texture_synthesis_nn_cons.png">
+<meta property="og:image" content="http://hanyinggarden.net/2018/03/19/Visualing_and_understanding_CNN/image/texture_synthesis_structure.png">
+<meta property="og:image" content="http://hanyinggarden.net/2018/03/19/Visualing_and_understanding_CNN/image/texture_synthesis_result.png">
+<meta property="og:image" content="http://hanyinggarden.net/2018/03/19/Visualing_and_understanding_CNN/image/style_transfer.png">
+<meta property="og:image" content="http://hanyinggarden.net/2018/03/19/Visualing_and_understanding_CNN/image/style_transfer_structure.png">
+<meta property="og:image" content="http://hanyinggarden.net/2018/03/19/Visualing_and_understanding_CNN/image/fast_style_transfer.png">
+<meta property="og:image" content="http://hanyinggarden.net/2018/03/19/Visualing_and_understanding_CNN/image/fast_style_transfer_structure.png">
+<meta property="og:updated_time" content="2018-03-19T04:24:35.162Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="学习笔记-CNN网络的可视化和理解（CS231n Lecture12 2017） | Hanying Garden">
+<meta name="twitter:description" content="学习笔记：CNN网络的可视化和理解">
+<meta name="twitter:image" content="http://hanyinggarden.net/2018/03/19/Visualing_and_understanding_CNN/image/first_layer_filters.png">
+    
+    
+    
+      <link rel="icon" type="image/x-icon" href="/favicon.png">
+    
+    <link rel="stylesheet" href="/css/uno.css">
+    <link rel="stylesheet" href="/css/highlight.css">
+    <link rel="stylesheet" href="/css/archive.css">
+    <link rel="stylesheet" href="/css/china-social-icon.css"><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+</head>
+<body>
+
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><span class="mobile btn-mobile-menu">
+        <i class="icon icon-list btn-mobile-menu__icon"></i>
+        <i class="icon icon-x-circle btn-mobile-close__icon hidden"></i>
+    </span>
+
+    
+
+<header class="panel-cover panel-cover--collapsed">
+
+
+  <div class="panel-main">
+
+  
+    <div class="panel-main__inner panel-inverted">
+    <div class="panel-main__content">
+
+        
+
+        <h1 class="panel-cover__title panel-title"><a href="/" title="link to homepage">Hanying Garden</a></h1>
+        <hr class="panel-cover__divider" />
+
+        
+        <p class="panel-cover__description">
+          自律 面对
+        </p>
+        <hr class="panel-cover__divider panel-cover__divider--secondary" />
+        
+
+        <div class="navigation-wrapper">
+
+          <nav class="cover-navigation cover-navigation--primary">
+            <ul class="navigation">
+
+              
+                
+                <li class="navigation__item"><a href="/#blog" title="" class="blog-button">首页</a></li>
+              
+                
+                <li class="navigation__item"><a href="/about" title="" class="">关于</a></li>
+              
+
+            </ul>
+          </nav>
+
+          <!-- ----------------------------
+To add a new social icon simply duplicate one of the list items from below
+and change the class in the <i> tag to match the desired social network
+and then add your link to the <a>. Here is a full list of social network
+classes that you can use:
+
+    icon-social-500px
+    icon-social-behance
+    icon-social-delicious
+    icon-social-designer-news
+    icon-social-deviant-art
+    icon-social-digg
+    icon-social-dribbble
+    icon-social-facebook
+    icon-social-flickr
+    icon-social-forrst
+    icon-social-foursquare
+    icon-social-github
+    icon-social-google-plus
+    icon-social-hi5
+    icon-social-instagram
+    icon-social-lastfm
+    icon-social-linkedin
+    icon-social-medium
+    icon-social-myspace
+    icon-social-path
+    icon-social-pinterest
+    icon-social-rdio
+    icon-social-reddit
+    icon-social-skype
+    icon-social-spotify
+    icon-social-stack-overflow
+    icon-social-steam
+    icon-social-stumbleupon
+    icon-social-treehouse
+    icon-social-tumblr
+    icon-social-twitter
+    icon-social-vimeo
+    icon-social-xbox
+    icon-social-yelp
+    icon-social-youtube
+    icon-social-zerply
+    icon-mail
+
+-------------------------------->
+
+<!-- add social info here -->
+
+
+
+<nav class="cover-navigation navigation--social">
+  <ul class="navigation">
+
+    
+      <!-- Github -->
+      <li class="navigation__item">
+        <a href="https://github.com/runnphoenix" title="My GitHub Page">
+          <i class='icon icon-social-github'></i>
+          <span class="label">GitHub</span>
+        </a>
+      </li>
+    
+
+    <!-- China social icon -->
+    <!--
+    
+      <li class="navigation__item">
+        <a href="" title="">
+          <i class='icon cs-icon-douban'></i>
+          <span class="label">Douban</span>
+        </a>
+      </li>
+
+      <li class="navigation__item">
+        <a href="" title="">
+          <i class='icon cs-icon-weibo'></i>
+          <span class="label">Weibo</span>
+        </a>
+      </li>
+
+    -->
+
+
+
+  </ul>
+</nav>
+
+
+
+
+        </div>
+
+      </div>
+
+    </div>
+
+    <div class="panel-cover--overlay"></div>
+  </div>
+</header>
+
+    <div class="content-wrapper">
+        <div class="content-wrapper__inner entry">
+            
+
+<article class="post-container post-container--single">
+
+  <header class="post-header">
+    
+    <h1 class="post-title">学习笔记-CNN网络的可视化和理解（CS231n Lecture12 2017）</h1>
+
+    
+
+    <div class="post-meta">
+      <time datetime="2018-03-19" class="post-meta__date date">2018-03-19</time> 
+
+      <span class="post-meta__tags tags">
+
+          
+            <font class="categories">
+            &#8226; 分类:
+            <a class="categories-link" href="/categories/ML/">ML</a>
+            </font>
+          
+
+          
+             &#8226; 标签:
+            <font class="tags">
+              <a class="tags-link" href="/tags/CNN/">CNN</a>
+            </font>
+          
+
+      </span>
+    </div>
+    
+    
+
+  </header>
+
+  <section id="post-content" class="article-content post">
+    <a id="more"></a>
+<h2 id="Intro"><a href="#Intro" class="headerlink" title="Intro"></a>Intro</h2><p>Lecture 12从多个角度对CNN网络进行分析和理解。我的理解肯定会有很多错误之处，欢迎指出，共同进步！</p>
+<h2 id="课程内容"><a href="#课程内容" class="headerlink" title="课程内容"></a>课程内容</h2><h3 id="First-Layer-Visualize-Filters"><a href="#First-Layer-Visualize-Filters" class="headerlink" title="First Layer: Visualize Filters"></a>First Layer: Visualize Filters</h3><p>第一层卷积，可以直接看到Filter学习到的特征。<br><img src="image/first_layer_filters.png" alt=""></p>
+<h3 id="Visualize-filters-at-higher-layers"><a href="#Visualize-filters-at-higher-layers" class="headerlink" title="Visualize filters at higher layers"></a>Visualize filters at higher layers</h3><p>中间卷积层的Filters，可以查看内容（卷积核是4维，故展示出来是图像组成的二维矩阵），但是不能直观的查看学习到了什么特征。<br><img src="image/intermediate_filters.png" alt=""></p>
+<p>And Why？</p>
+<h3 id="Last-Layer"><a href="#Last-Layer" class="headerlink" title="Last Layer"></a>Last Layer</h3><p>指最后的全连接层，代表图片最后的特征向量。</p>
+<h4 id="Nearest-Neighbors"><a href="#Nearest-Neighbors" class="headerlink" title="Nearest Neighbors"></a>Nearest Neighbors</h4><p>最后得到的特征向量相似，那么输入图片肯定也相似。<br><img src="image/neareast_neighbors.png" alt=""><br>其中左边是通过KNN来找到的最相近图片，右边是CNN实现的。可以发现，左侧只是找到了观感上相近的图片（青蛙跟猫的姿势和方向类似），甚至不能保证是同一类别，正确率很低；而右侧则很好地完成了任务，与物体方向相关性不强。</p>
+<p>个人观点，搜索引擎的图片查找功能，可以通过类似的思路实现。</p>
+<h4 id="Dimensionality-Reduction"><a href="#Dimensionality-Reduction" class="headerlink" title="Dimensionality Reduction"></a>Dimensionality Reduction</h4><p>将最后的特征向量降至二维，以便于我们直观上来理解。</p>
+<p>更复杂的降维方式：t-SNE<br><img src="image/dimentionality.png" alt=""></p>
+<p>上图的例子是识别0-9十个数字，降维到二维以后还是能保持聚类形态。</p>
+<h3 id="Visualizing-Activations"><a href="#Visualizing-Activations" class="headerlink" title="Visualizing Activations"></a>Visualizing Activations</h3><p>不再观察Filters的值，改为直接观察中间层的Activation值，会发现某些值“拟合”了输入数据。<br><img src="image/visual_activations.png" alt=""><br>上图绿框中的神经元“拟合”了输入图片。</p>
+<h3 id="Maximally-Activating-Patches"><a href="#Maximally-Activating-Patches" class="headerlink" title="Maximally Activating Patches"></a>Maximally Activating Patches</h3><p>选取CNN网络某一层的某个channel，观察这个channel中的最大值对应的原图区域。<br><img src="image/maximally_activating_patches.png" alt=""><br>可以发现，通常某个神经元会对应特定的“模式”，如上图中所示，比如圆形、人脸、文字等等。</p>
+<h3 id="Occlusion-Experiments"><a href="#Occlusion-Experiments" class="headerlink" title="Occlusion Experiments"></a>Occlusion Experiments</h3><p>将原图中的某个区域遮挡起来，然后通过CNN网络，得到其属于正确分类的概率。由此可以发现原图中哪一部分对分类来说是最重要的。<br><img src="image/occlusion.png" alt="遮挡"><br><img src="image/occlusion_results.png" alt="结果"></p>
+<h3 id="Saliency-Maps"><a href="#Saliency-Maps" class="headerlink" title="Saliency Maps"></a>Saliency Maps</h3><p>最后得到的特征向量对原图做偏导。<br><img src="image/saliency.png" alt=""><br>具体做法是取最后的特征向量中正确分类的值，然后反向传播对原图求偏导。取其绝对值。由于原图有RGB三个通道，所以取三个中的最大值。</p>
+<p>Saliency Map还有一个用途是图像分割。但结果不是很准确。<br><img src="image/saliency_segment.png" alt=""></p>
+<h3 id="Intermediate-Features-via-guided-backprop"><a href="#Intermediate-Features-via-guided-backprop" class="headerlink" title="Intermediate Features via (guided) backprop"></a>Intermediate Features via (guided) backprop</h3><p>取CNN网络中的某个神经元，对原图做反向传播求梯度。由此找出该神经元对应原图中的哪个区域。</p>
+<p>与Saliency Maps和Maximally Activating Patches都有些类似，与前者的差别在于这里取中间某个layer的某个神经元的值做反向传播，而Saliency Maps是取最后一层对应正确分类的那个值。与后者的差别在于这里采用了反向传播和梯度，而Maximally Activating Patches只是对应了原图中的区域。</p>
+<p>下图展示了与Maximally Activating Patches的异同<br><img src="image/guided.png" alt=""></p>
+<p>如果在对Relu做反向传播的过程中，只将正的梯度反向传播，得到的图像结果会更好，这种就叫guided。<br><img src="image/guided_backprop.png" alt=""><br>如上图所示，第一行是Relu的正向传播，第二行的图片是Relu正常的反向传播（注意是正向传播时X中正值的区域会被传回），第三行的图是将正值的梯度反向传播，第四行的图结合了第二、三行的图，即只将正的梯度做Relu反向传播。</p>
+<p>红色区域表示正常的Relu反向传播不会被传回，黄色区域表示负值的梯度不会被反向传播，只有两种颜色都不覆盖的区域才会被传回。</p>
+<h3 id="Visualizing-CNN-features-Gradient-Ascent"><a href="#Visualizing-CNN-features-Gradient-Ascent" class="headerlink" title="Visualizing CNN features: Gradient Ascent"></a>Visualizing CNN features: Gradient Ascent</h3><p>通过合成一张图片，展现CNN网络是如何“看待”某个分类的。<br><img src="image/gradient_ascent.png" alt=""></p>
+<p>具体过程如下：</p>
+<ol>
+<li>初始化一张空图片（注意不是随机初始化）</li>
+</ol>
+<p>重复以下步骤：</p>
+<ol>
+<li>在训练好的CNN网络上进行前向传播，得到最后的特征向量，取其中正确分类的值</li>
+<li>将该值对原图反向传播求梯度</li>
+<li>用该梯度值更新图片</li>
+</ol>
+<p><img src="image/gradient_ascent_regularizer.png" alt=""><br>regularizer的作用是使结果看起来更加自然，可以采用简单和复杂两种形式。<br><img src="image/regularizer_easy.png" alt=""><br>简单形式采用了L2范数<br><img src="image/regularizer_complex.png" alt=""></p>
+<p>复杂形势除了才去L2范数以外，还在优化过程中采用了：</p>
+<ol>
+<li>高斯模糊</li>
+<li>将小值直接变为0</li>
+<li>将小的梯度值直接变为0</li>
+</ol>
+<p>采用复杂形式的结果更好:<br><img src="image/regularizer_complex_result.png" alt=""></p>
+<p>中间层同样也可以展示：<br><img src="image/gradient_ascent_intermediate.png" alt=""></p>
+<h3 id="Fooling-Images"><a href="#Fooling-Images" class="headerlink" title="Fooling Images"></a>Fooling Images</h3><p>跟GAN是一个思路，即只需要更改少量像素，在人眼看不出区别的情况下，就可以更改一张图片在CNN中的分类结果。</p>
+<p>具体实现过程：取分类A中的一张图片，将其分类结果设置为B。前向传播图片，得到与B分类结果的误差，反向传播更新原图，直到CNN网络将其判断为分类B。</p>
+<p><img src="image/fooling_iamges.png" alt=""></p>
+<h3 id="DeepDream"><a href="#DeepDream" class="headerlink" title="DeepDream"></a>DeepDream</h3><p>首先，网络是预先在某种数据集上训练过的。</p>
+<p>输入一张图片，将其在CNN网络某一层的值作为梯度进行反向传播，更新原图。<br><img src="image/deep_dream_method.png" alt=""></p>
+<p>原理是什么呢？</p>
+<p>课件中最开始例子中的网络的训练集是动物，那么网络各中间层学习到的是各种动物由浅到深的特征。如果输入一张不相关的风景图，网络依然会尝试在该图上寻找之前学习到的各种特征。如果网络觉得某部分云彩看起来像一条狗，那么我们就将这个结果反馈回原图，再将新的图片通过网络，不断地增强这个印象，直至能够将其清楚地表现出来。</p>
+<p>选取不同的中间层，结果不一样。如果选择的是开始的一些层，那图片累计的也是一些基础组件特征。这是由CNN网络的特性决定的，越往后学习到的特征越复杂。<br><img src="image/deep_dream_begin_layers.png" alt=""><br>如果选择的是后面的一些层，那图片上就会出现比较复杂的特征。<br><img src="image/deep_dream.png" alt=""></p>
+<p>反向回的图像与该CNN网络是在什么样的数据集上训练的密切相关。如果训练数据集是建筑或者风景，那么图片混合上的也是相关的东西。<br><img src="image/deep_dream_other_datasets.png" alt=""></p>
+<h3 id="Feature-Inversion"><a href="#Feature-Inversion" class="headerlink" title="Feature Inversion"></a>Feature Inversion</h3><p>尝试从CNN网络恢复原图。<br><img src="image/feature_inversion.png" alt=""><br>取CNN网络某一层的Feature Map。随机初始化一张新图片，并得到其在对应层上的Feature Map。比较两个Feature Map的差距并反向传播更新生成的图片。<br><img src="image/feature_inversion_method.png" alt=""><br>由于越早的层保留的信息越多，所以恢复的图像也越接近原图。</p>
+<p>加入Regulation以使图片看起来更加自然。</p>
+<h3 id="Texture-Synthesis"><a href="#Texture-Synthesis" class="headerlink" title="Texture Synthesis"></a>Texture Synthesis</h3><h4 id="Gram-Matrix"><a href="#Gram-Matrix" class="headerlink" title="Gram Matrix"></a>Gram Matrix</h4><p>Gram Matrix求法：</p>
+<ol>
+<li>取Feature Map某个“像素”上各个维度上的值，得到一个向量C。</li>
+<li>将C与其转置相乘，得到一个矩阵。该矩阵表示这个“像素”上各个特征之间的关系。</li>
+<li>取Feature Map上所有的“像素”进行1和2两步操作，取这些结果的平均值，即为Gram Matrix。<br><img src="image/gram_matrix.png" alt=""><br>那么，Gram Matrix表示了什么呢？是该Feature Map各个维度之间的关系。更进一步引申为该Feature Map的特征。</li>
+</ol>
+<h4 id="Nerual-Texture-Synthesis"><a href="#Nerual-Texture-Synthesis" class="headerlink" title="Nerual Texture Synthesis"></a>Nerual Texture Synthesis</h4><p>学习小的质地来生成更大面积的质地。<br><img src="image/texture_synthesis.png" alt=""><br>先介绍了以前的方法：NN。<br><img src="image/texture_synthesis_nn.png" alt=""><br>这种方法存在一些问题，比如下图生成的Texture，很显然并不是均匀分布的砖块。<br><img src="image/texture_synthesis_nn_cons.png" alt=""><br>更加先进的方法：通过Gram Matrix来实现。思路：计算两张图各层Feature Map的Gram Matrix，将他们的差距累加起来作为Loss Function，用该Loss Function对合成图的梯度来更新合成图。这样就可以将原图各层的特征都学习到了。也就是学习到了“风格”。<br><img src="image/texture_synthesis_structure.png" alt=""><br>效果如下：<br><img src="image/texture_synthesis_result.png" alt=""></p>
+<h3 id="Nerual-Style-Transfer"><a href="#Nerual-Style-Transfer" class="headerlink" title="Nerual Style Transfer"></a>Nerual Style Transfer</h3><p><img src="image/style_transfer.png" alt=""><br>Style Transfer是把之前的Feature Inversion和Texture Synthesis结合起来。其中，Feature Inversion负责从Content Image中学习图片的整体布局信息，而Texture Synthesis则从Style Image中学习风格。这样，最终生成的图片中就既包含了Content Image的整体布局，又包含了Style Image的风格。<br><img src="image/style_transfer_structure.png" alt=""></p>
+<h4 id="Fast-Style-Transfer"><a href="#Fast-Style-Transfer" class="headerlink" title="Fast Style Transfer"></a>Fast Style Transfer</h4><p>上面介绍的风格迁移算法，计算量非常大，需要在CNN网络上进行多次前向和后向传播，非常耗时，无法完成实时地迁移。</p>
+<p>解决方案：引入一个新的网络，并使用预训练的CNN网络。<br><img src="image/fast_style_transfer.png" alt=""><br>下面是整体的结构图：<br><img src="image/fast_style_transfer_structure.png" alt=""></p>
+<h3 id="Summary"><a href="#Summary" class="headerlink" title="Summary"></a>Summary</h3><p>总结，将介绍的这些方法分为三类：</p>
+<h4 id="Activations"><a href="#Activations" class="headerlink" title="Activations"></a>Activations</h4><p>包括：Nearest neighbors, Dimensionality reduction, maximal patches, occlusion<br>通过观察卷积网络各层的值来进行分析。</p>
+<h4 id="Gradients"><a href="#Gradients" class="headerlink" title="Gradients"></a>Gradients</h4><p>包括：Saliency maps, Class visualization, fooling images, feature inversion<br>通过梯度进行分析，包括对原图进行更改和生成新图片两种方式。</p>
+<h4 id="Fun"><a href="#Fun" class="headerlink" title="Fun"></a>Fun</h4><p>包括：DeepDream, Style Transfer<br>寓教于乐不思蜀中无大将廖化作先锋芒毕露</p>
+
+  </section>
+
+  
+
+<section class="post-comments">
+  <div id="disqus_thread"></div>
+  <script type="text/javascript">
+      var disqus_shortname = 'hanyinggarden'; 
+      /* * * DON'T EDIT BELOW THIS LINE * * */
+      (function() {
+          var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+          dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+          (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+      })();
+  </script>
+  <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</section>
+
+
+  
+  
+  <span id="busuanzi_container_page_pv">本文阅读量: <span id="busuanzi_value_page_pv"></span></span>
+
+</article>
+
+
+            <footer class="footer">
+
+    <span class="footer__copyright">&copy; 2018. Zhang Hanying. | 由<a href="https://hexo.io/">Hexo</a>强力驱动 | 主题<a href="https://github.com/someus/huno">Huno</a></span>
+ 
+    <script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span id="busuanzi_container_site_uv">访客数: <span id="busuanzi_value_site_uv">    </span></span>   
+    <span id="busuanzi_container_site_pv">总访问量: <span id="busuanzi_value_site_pv"></span></span>
+</footer>
+
+        </div>
+    </div>
+
+    <!-- js files -->
+    <script src="/js/jquery.min.js"></script>
+    <script src="/js/main.js"></script>
+    <script src="/js/scale.fix.js"></script>
+    
+
+    
+
+    <script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript"> 
+        $(document).ready(function(){
+            MathJax.Hub.Config({ 
+                tex2jax: {inlineMath: [['[latex]','[/latex]'], ['\\(','\\)']]} 
+            });
+        });
+    </script>
+
+
+    
+
+    <script src="/js/awesome-toc.min.js"></script>
+    <script>
+        $(document).ready(function(){
+            $.awesome_toc({
+                overlay: true,
+                contentId: "post-content",
+            });
+        });
+    </script>
+
+
+    
+    
+    <!--kill ie6 -->
+<!--[if IE 6]>
+  <script src="//letskillie6.googlecode.com/svn/trunk/2/zh_CN.js"></script>
+<![endif]--><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"skipTags":["script","noscript","style","textarea","pre","code"],"processEscapes":true},"TeX":{"equationNumbers":{"autoNumber":"AMS"}}});
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
+
+</body>
+</html>
